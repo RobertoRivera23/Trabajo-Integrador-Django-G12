@@ -14,19 +14,22 @@
 
 <body>
     <header>
-    <h1 class="centered">Bienvenidos a FutbolConnect</h1>
-    <h2 class="centered">Aplicación de contacto entre Representantes y Jugadores</h2>
+    {% comment %} <h1 class="centered">Bienvenidos a FutbolConnect</h1>
+    <h2 class="centered">Aplicación de contacto entre Representantes y Jugadores</h2> {% endcomment %}
     <nav>
         <ul>
             <li><a href="{% url 'index' %}">Home</a></li>
             <li><a href="{% url 'listado_jugadores' %}">Listado_jugadores</a></li>
             <li><a href="{% url 'contacto' %}">Contacto</a></li>
+            <li><a href="{% url 'alta_jugador' %}">Alta_jugadores</a></li>
         </ul>
     </nav>
     </header>
-    
+    <h1 class="centered">Bienvenidos a FutbolConnect</h1>
+    <h2 class="centered">Aplicación de contacto entre Representantes y Jugadores</h2>
 
     <main class="centered">
+    
     {% block main %} 
     {% endblock %}
     </main> 
@@ -42,3 +45,5 @@
 </body>
 
 </html>
+
+

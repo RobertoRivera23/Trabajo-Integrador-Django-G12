@@ -1,0 +1,12 @@
+{% extends "web\base.html" %}
+{% load static %}
+
+{% block title %} FC-Alta Jugadores {% endblock %}
+{% block extra_css %} {% endblock %}
+
+{% block main %}  
+    <h2>Formulario de alta de Jugadores:</h2>
+    <p>Bienvenid@ {{nombre}}</p>
+    <p>{{fecha_hora}}</p>
+    <a href="{% url 'index' %}"> Volver </a>
+{% endblock %}

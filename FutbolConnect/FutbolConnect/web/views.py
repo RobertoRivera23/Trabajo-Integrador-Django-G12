@@ -41,3 +41,10 @@ def contacto(request):
         'fecha_hora': datetime.datetime.now()
     }
     return render(request, '../templates/web/contacto.html', context)
+
+def alta_jugador(request):
+    context = {
+        'fecha_hora': datetime.datetime.now()
+    }
+
+    return render(request, '../templates/web/alta_jugador.html', context)
