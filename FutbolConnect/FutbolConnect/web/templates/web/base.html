@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport content=width=device-width initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'web/styles/base.css' %}">
+
+    {% block extra_css %} {% endblock %}
+  
+</head>
+
+<body>
+    <header>
+    <h1 class="centered">Bienvenidos a FutbolConnect</h1>
+    <h2 class="centered">Aplicación de contacto entre Representantes y Jugadores</h2>
+    <nav>
+        <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'listado_jugadores' %}">Listado_jugadores</a></li>
+            <li><a href="{% url 'contacto' %}">Contacto</a></li>
+        </ul>
+    </nav>
+    </header>
+
+    <main class="centered">
+    {% block main %} 
+    {% endblock %}
+    </main> 
+
+    <footer class="centered">
+        <p> Grupo 12 - Todos los derechos reservados</p>
+
+        {% comment %} Estoy probando agregar redes sociales {% endcomment %}
+        <div class="social-media-icons">
+        <a href="https://www.facebook.com" target="_blank">
+            <img src="{% static 'web/images/face.png' %}" alt="Facebook" />
+        </a>
+        <a href="https://www.whatsapp.com" target="_blank">
+            <img src="{% static 'web/images/whatsapp.png' %}" alt="Twitter" />
+        </a>
+        <a href="https://www.instagram.com" target="_blank">
+            <img src="{% static 'web/images/insta.png' %}" alt="Instagram" />
+        </a>
+    </div>
+    </footer>
+</body>
+
+</html>

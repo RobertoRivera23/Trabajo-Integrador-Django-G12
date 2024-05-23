@@ -1,37 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends "web\base.html" %}
+
+{% block title %} FC-Listado de Jugadores {% endblock %}
+{% block extra_css %} {% endblock %}
+
+{% block main %}  
+
+    <p>Usuario:{{nombre}}</p>
     <h1>Listado de Jugadores</h1>
+    <p>{{fecha_hora}}</p>
 
-    {% if cuota_al_dia %}
-    <p style="padding: 15px; background-color: green; color: white;">EL JUGADOR CUMPLE LOS REQUISITOS PARA SER DADO DE ALTA</p> 
-    {% else %}
-    <p style="padding: 15px; background-color: rgb(236, 30, 7); color: white;">JUGADOR NO PUEDE SER DADO DE ALTA</p> 
-    {% endif %}
+    <body>
+    
 
-    <a href="{% url 'index' %}">volver</a>
+        {% if cuota_al_dia %}
+        <p style="padding: 15px; background-color: green; color: white;">EL JUGADOR CUMPLE LOS REQUISITOS PARA SER DADO DE ALTA</p> 
+        {% else %}
+        <p style="padding: 15px; background-color: rgb(236, 30, 7); color: white;">JUGADOR NO PUEDE SER DADO DE ALTA</p> 
+        {% endif %}
+    
+        <a href="{% url 'index' %}">volver</a>
+    
+        <section>
+            {% for jugadores in jugadores%}
+            <article>
+                <p>{{ jugadores | upper}}</p>
+            </article>
+    
+            {% empty %}
+               <article>
+                    <p>No hay jugadores cargados</p>
+    
+               </article>
+    
+    
+    
+            {% endfor %}
+    
+        </section>
+    </body>
 
-    <section>
-        {% for jugadores in jugadores%}
-        <article>
-            <p>{{ jugadores }}</p>
-        </article>
-
-        {% empty %}
-           <article>
-                <p>No hay jugadores cargados</p>
-
-           </article>
+{% endblock %}
 
 
 
-        {% endfor %}
 
-    </section>
-</body>
-</html>
+
+

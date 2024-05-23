@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header, main, footer, nav {
+    padding: 15px;
+}
+
+header {
+    background-color: rgb(43, 92, 226);
+}
+
+main {
+    flex: 1;
+    flex-direction: column;
+}
+
+/* footer {
+    background-color: blue;
+    color: white;
+} */
+
+footer {
+    background-color: rgb(43, 92, 226);
+    color: white;
+    display: flex;
+    flex-direction: column; /* Alinea los elementos en una columna */
+    align-items: center; /* Centra horizontalmente los elementos */
+}
+/* agrego estilo */
+.social-media-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.social-media-icons img {
+    width: 32px; /* Ajusta el tamaño del icono según sea necesario */
+    height: 32px; /* Ajusta el tamaño del icono según sea necesario */
+    margin-top: 10px;
+}

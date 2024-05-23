@@ -1,0 +1,11 @@
+{% extends "web\base.html" %}
+
+{% block title %} FC-Contacto {% endblock %}
+{% block extra_css %} {% endblock %}
+
+{% block main %}  
+    <h2>Contacto</h2>
+    <p>Bienvenid@ {{nombre}}</p>
+    <p>{{fecha_hora}}</p>
+    <a href="{% url 'index' %}"> Volver </a>
+{% endblock %}
