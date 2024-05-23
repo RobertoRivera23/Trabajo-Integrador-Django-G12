@@ -44,14 +44,20 @@ def contacto(request):
     return render(request, '../templates/web/contacto.html', context)
 
 def alta_jugador(request):
-   
     context = {}
-    
+
     if request.method == "GET":
         context['alta_jugador_form'] = forms.AltaJugadorForm()
-    else: #En caso de que no sea GET, paso con datos que me paso el usuario
-        context['alta_jugador_form'] = forms.AltaJugadorForm(request.POST) 
-        return redirect('index')
-        print(request.POST)
+   
+    else: # En caso de que no sea GET, paso con datos que me paso el usuario
+        form = forms.AltaJugadorForm(request.POST)
+        context['alta_jugador_form'] = form 
+        
+        # Validar el form
+        if form.is_valid():
 
+            print(request.POST)
+            
+            return redirect('index')
+       
     return render(request, '../templates/web/alta_jugador.html', context)

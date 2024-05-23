@@ -1,5 +1,5 @@
 from django import forms
-
+from django.core.exceptions import ValidationError
 
 
 class AltaJugadorForm(forms.Form):
@@ -13,3 +13,10 @@ class AltaJugadorForm(forms.Form):
     telefono = forms.CharField(label="Teléfono", required=True)
     correo = forms.EmailField(label="Email", required=True)
     
+
+    def clean_nombre(self):
+        if not self.cleaned_data['nombre'].isalpha:
+            raise ValidationError("El nombre solo puede estar compuesto por letras")
+        
+        return self.cleaned_data['nombre']
+        
