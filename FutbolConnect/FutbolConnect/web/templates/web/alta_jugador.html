@@ -7,7 +7,7 @@
 {% block main %}  
     <h2>Alta de Nuevo Jugador:</h2>
     <p>{{fecha_hora}}</p>
-    <a href="{% url 'index' %}"> Volver </a>
+
 
     <form method="POST" action="{% url 'alta_jugador' %}">
         {% csrf_token %}
@@ -17,5 +17,7 @@
         class="btn btn-primary"> 
        
     </form>
+
+    <a href="{% url 'index' %}"> Volver </a>
 
 {% endblock %}

@@ -11,7 +11,7 @@
     <p>{{fecha_hora}}</p>
 
     <body>
-    
+   
 
         {% if cuota_al_dia %}
         <p style="padding: 15px; background-color: green; color: white;">EL JUGADOR CUMPLE LOS REQUISITOS PARA SER DADO DE ALTA</p> 
@@ -19,7 +19,7 @@
         <p style="padding: 15px; background-color: rgb(236, 30, 7); color: white;">JUGADOR NO PUEDE SER DADO DE ALTA</p> 
         {% endif %}
     
-        <a href="{% url 'index' %}">volver</a>
+
     
         <section>
             {% for jugadores in jugadores%}
@@ -40,6 +40,9 @@
         </section>
     </body>
 
+
+    <a href="{% url 'index' %}">volver</a>
+        
 {% endblock %}
 
 

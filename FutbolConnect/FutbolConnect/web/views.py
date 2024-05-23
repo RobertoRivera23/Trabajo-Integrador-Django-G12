@@ -28,6 +28,7 @@ def listado_jugadores(request):
             'Lionel Messi',
             'Diego Armando Maradona',
             'DiMaria',
+            'Aimar',
         ],
         'cuota_al_dia': True
 
@@ -55,3 +56,16 @@ def alta_jugador(request):
         print(request.POST)
 
     return render(request, '../templates/web/alta_jugador.html', context)
+
+def alta_representante(request):
+   
+    context = {}
+    
+    if request.method == "GET":
+        context['alta_representante_form'] = forms.AltaRepresentanteForm()
+    else: #En caso de que no sea GET, paso con datos que me paso el usuario
+        context['alta_representante_form'] = forms.AltaRepresentanteForm(request.POST) 
+        return redirect('index')
+        print(request.POST)
+
+    return render(request, '../templates/web/alta_representante.html', context)
