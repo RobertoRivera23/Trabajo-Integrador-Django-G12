@@ -1,31 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport content=width=device-width initial-scale=1.0">
-    <title>FutbolConnect</title>
+{% extends "web\base.html" %}
+{% load static %}
 
-</head>
+{% block title %} Home {% endblock %}
+{% block extra_css %} {% endblock %}
 
-<body>
-    <h1>Bienvenidos a FutbolConnect</h1>
-    <h2>Aplicación de contacto entre Representantes y Jugadores</h2>
-
-    <nav>
-        <ul>
-            <li><a href="{% url 'index' %}">index</a></li>
-            <li><a href="{% url 'listado_jugadores' %}">listado_jugadores</a></li>
-        </ul>
-    </nav>
-
-
-
-    <p>Bienvenid@ {{ nombre}}</p>
-
-    <footer>
-        <p>{{ fecha_hora}}</p>
-    </footer>
-</body>
-
-</html>
+{% block main %} 
+    <img src="{% static 'web/images/fondo1.jpg' %}" alt="Foto del Fondo">
+   <p>Bienvenid@ {{ nombre }}</p>
+   <p>{{ fecha_hora}}</p>
+{% endblock %}

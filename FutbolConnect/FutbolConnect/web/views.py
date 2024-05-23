@@ -8,8 +8,8 @@ import datetime
 def index(request):
 
     context ={
-        'nombre': 'Daniel',
-        'fecha_hora': datetime.datetime.now  () 
+        'nombre': 'Daniel, Pavon',
+        'fecha_hora': datetime.datetime.now()
           }
     
     return render(request, '../templates/web/index.html', context)
@@ -22,6 +22,7 @@ def saludar (request, nombre):
 def listado_jugadores(request):
     
     context ={
+         'nombre': 'Daniel, Pavon',
         'jugadores':[
             'Lionel Messi',
             'Diego Armando Maradona',
@@ -29,7 +30,14 @@ def listado_jugadores(request):
         ],
         'cuota_al_dia': True
 
-
     }
 
     return render(request, 'web/listado_jugadores.html', context)
+
+def contacto(request):
+
+    context = {
+        'nombre': 'Daniel, Pavon',
+        'fecha_hora': datetime.datetime.now()
+    }
+    return render(request, '../templates/web/contacto.html', context)
