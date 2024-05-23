@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import datetime
+from .forms import *
 
 # Create your views here.
 # Aca creamos todas las vistas posibles
@@ -44,7 +45,8 @@ def contacto(request):
 
 def alta_jugador(request):
     context = {
-        'fecha_hora': datetime.datetime.now()
+        'fecha_hora': datetime.datetime.now(),
+        'alta_jugador_form': AltaJugadorForm(),
     }
 
     return render(request, '../templates/web/alta_jugador.html', context)
