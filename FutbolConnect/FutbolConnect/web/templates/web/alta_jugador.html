@@ -9,16 +9,13 @@
     <p>{{fecha_hora}}</p>
     <a href="{% url 'index' %}"> Volver </a>
 
-    <form action="">
+    <form method="POST" action="{% url 'alta_jugador' %}">
+        {% csrf_token %}
         {{ alta_jugador_form }}
-       
-                  
         
        <input type="submit" 
         class="btn btn-primary"> 
        
-
-        
     </form>
 
 {% endblock %}

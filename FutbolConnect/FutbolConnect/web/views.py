@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse
 import datetime
-from .forms import *
+from . import forms
 
 # Create your views here.
 # Aca creamos todas las vistas posibles
@@ -44,9 +44,14 @@ def contacto(request):
     return render(request, '../templates/web/contacto.html', context)
 
 def alta_jugador(request):
-    context = {
-        'fecha_hora': datetime.datetime.now(),
-        'alta_jugador_form': AltaJugadorForm(),
-    }
+   
+    context = {}
+    
+    if request.method == "GET":
+        context['alta_jugador_form'] = forms.AltaJugadorForm()
+    else: #En caso de que no sea GET, paso con datos que me paso el usuario
+        context['alta_jugador_form'] = forms.AltaJugadorForm(request.POST) 
+        return redirect('index')
+        print(request.POST)
 
     return render(request, '../templates/web/alta_jugador.html', context)
