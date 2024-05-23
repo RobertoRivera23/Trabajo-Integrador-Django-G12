@@ -7,6 +7,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-family: 'Roboto', sans-serif;
 }
 
 .centered {
@@ -14,18 +15,62 @@ body {
     justify-content: center;
     align-items: center;
 }
-
-header, main, footer, nav {
+header{
+    padding: 5px;
+}
+main, footer {
     padding: 15px;
 }
+/* aca agrego para modifcar el naved */
+nav {
+    display: flex;
+    justify-content: flex-end; /* Esto alinea los elementos a la derecha */
+    padding: 5px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline; /* Esto hace que los elementos de la lista estén en línea */
+    margin-left: 10px; /* Espacio entre elementos */
+}
+
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding-left: 20px;
+    transition: color 0.3s; /* Transición suave de color */
+}
+
+nav ul li a:hover {
+    color: black; /* Color al pasar el cursor */
+}
+
+
 
 header {
     background-color: rgb(43, 92, 226);
 }
 
+
 main {
     flex: 1;
     flex-direction: column;
+}
+
+h1{
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+h2{
+    margin-bottom: 10px;
 }
 
 footer {

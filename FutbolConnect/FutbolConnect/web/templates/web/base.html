@@ -14,8 +14,8 @@
 
 <body>
     <header>
-    <h1 class="centered">Bienvenidos a FutbolConnect</h1>
-    <h2 class="centered">Aplicación de contacto entre Representantes y Jugadores</h2>
+    {% comment %} <h1 class="centered">Bienvenidos a FutbolConnect</h1>
+    <h2 class="centered">Aplicación de contacto entre Representantes y Jugadores</h2> {% endcomment %}
     <nav>
         <ul>
             <li><a href="{% url 'index' %}">Home</a></li>
@@ -24,8 +24,10 @@
         </ul>
     </nav>
     </header>
-
+    <h1 class="centered">Bienvenidos a FutbolConnect</h1>
+    <h2 class="centered">Aplicación de contacto entre Representantes y Jugadores</h2>
     <main class="centered">
+    
     {% block main %} 
     {% endblock %}
     </main> 
@@ -41,3 +43,5 @@
 </body>
 
 </html>
+
+
