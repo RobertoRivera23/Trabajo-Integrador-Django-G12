@@ -1,5 +1,15 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.forms.utils import ErrorList
+
+class CustomErrorList(ErrorList):
+    def __str__(self):
+        return self.as_divs()
+
+    def as_divs(self):
+        if not self:
+            return ''
+        return '<div class="errorlist">%s</div>' % ''.join(['<div class="error">%s</div>' % e for e in self])
 
 class AltaJugadorForm(forms.Form):
     nombre = forms.CharField(label="Nombre", required=True,widget=forms.TextInput(attrs={'class': 'campo_azul'}))

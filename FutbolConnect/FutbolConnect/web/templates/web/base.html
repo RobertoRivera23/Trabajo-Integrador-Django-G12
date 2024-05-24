@@ -10,9 +10,35 @@
 
     {% block extra_css %} {% endblock %}
   
+    <style>
+        .errorlist {
+            color: red;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+
+
 </head>
 
 <body>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {{ form.nombre.errors }}
+        {{ form.nombre }}
+        {{ form.apellido.errors }}
+        {{ form.apellido }}
+        {{ form.dni.errors }}
+        {{ form.dni }}
+        <!-- Acá Agregar los demás campos de la misma manera -->
+        <button type="submit">Enviar</button>
+    </form>
+
+
     <header>
     {% comment %} <h1 class="centered">Bienvenidos a FutbolConnect</h1>
     <h2 class="centered">Aplicación de contacto entre Representantes y Jugadores</h2> {% endcomment %}

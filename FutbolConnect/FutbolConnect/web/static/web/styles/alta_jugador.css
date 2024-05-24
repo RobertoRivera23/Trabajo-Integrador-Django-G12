@@ -1,3 +1,13 @@
 .campo_azul {
     background-color: rgb(96, 163, 163);
 }
+
+.errorlist {
+    color: red;
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
