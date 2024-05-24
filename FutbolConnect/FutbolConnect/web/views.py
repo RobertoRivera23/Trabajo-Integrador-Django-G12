@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 import datetime
 from . import forms
+from django.contrib import messages
 
 # Create your views here.
 # Aca creamos todas las vistas posibles
@@ -55,9 +56,12 @@ def alta_jugador(request):
         
         # Validar el form
         if form.is_valid():
+        # Si el form es correcto
+        # Lo redirijo a una vista segura por ejemplo el index
+            messages.success (request, 'El Jugador fue dado de alta con éxito')
 
             print(request.POST)
             
-            return redirect('index')
+            #return redirect('index') #Se lo saco para probar
        
     return render(request, '../templates/web/alta_jugador.html', context)

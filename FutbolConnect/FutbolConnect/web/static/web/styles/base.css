@@ -18,6 +18,23 @@ body {
 header{
     padding: 5px;
 }
+
+header .messages {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    border-radius: 5px;
+}
+
+
+header .messages .success {
+    background-color: rgba(0,255,0,0.5);
+    padding: 15px;
+    color: rgb(16, 10, 209);
+}
+
 main, footer {
     padding: 15px;
 }
