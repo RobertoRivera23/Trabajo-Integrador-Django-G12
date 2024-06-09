@@ -3,6 +3,7 @@ from django.http import HttpResponse
 import datetime
 from . import forms
 from django.contrib import messages
+from .models import Jugador
 
 # Create your views here.
 # Aca creamos todas las vistas posibles
@@ -58,6 +59,19 @@ def alta_jugador(request):
         if form.is_valid():
         # Si el form es correcto
         # Lo redirijo a una vista segura por ejemplo el index
+
+            nuevo_jugador = Jugador(
+                nombre = form.cleaned_data['nombre'], 
+                apellido = form.cleaned_data['apellido'], 
+                dni = form.cleaned_data['dni'], 
+                LE = form.cleaned_data['dni'] + 10000
+            )
+
+            nuevo_jugador.save()
+
+
+
+
             messages.success (request, 'El Jugador fue dado de alta con éxito')
 
             print(request.POST)
