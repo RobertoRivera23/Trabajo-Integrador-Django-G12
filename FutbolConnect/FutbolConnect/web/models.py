@@ -41,13 +41,24 @@ class TipoContratos(models.Model):
     def __str__(self):
         return f"{self.nombre} | {self.turno} | Paises: {self.paises.nombre_completo() if self.paises else '---'}"
 
+#La clase para RepresentanteDeJugadores
+
+#class RepresentanteDeJugadores(models.Model):
+    #name = models.CharField(max_length=100)
+    # Other fields here
+
+    #def __str__(self):
+      #  return self.name
+
 class Inscripcion(models.Model):
     jugador = models.ForeignKey(Jugador, on_delete=models.CASCADE)
-    tipo_contrato = models.ForeignKey(TipoContratos, on_delete=models.CASCADE)
+    tipo_contrato = models.ForeignKey(TipoContratos, on_delete=models.CASCADE, null=True, blank=True)
     fecha_inscripcion = models.DateField(verbose_name="Fecha de inscripción", auto_now_add=True)
 
     class Meta:
         db_table = 'inscripcion'
+
+
 
 ############################ Hasta aca teniamos #####################################
 
