@@ -5,6 +5,17 @@ from . import forms
 from django.contrib import messages
 from .models import Jugador
 
+
+from django.views.generic.list import ListView
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+#from .forms import *
+from .models import Jugador, Paises
+
+
+
 # Create your views here.
 # Aca creamos todas las vistas posibles
 
@@ -17,10 +28,38 @@ def index(request):
     
     return render(request, '../templates/web/index.html', context)
 
+
+
+def user_logout(request):
+    logout(request)
+
+    messages.success(request, 'Sesion Cerrada')
+
+    return redirect('index')
+
+
 def saludar (request, nombre):
     print(request.method)
 
     return HttpResponse(f"<h1>Bienvenid@ {nombre} </h1>")
+
+
+
+def alumnos_por_año(request, year):
+    alumnos = ["Carlos", "Maria", "Jose"] # """"Levanta""""" los usuarios de la BBDD
+    return HttpResponse(f"listado de alumnos: {year} \n {alumnos}")
+
+@login_required
+def listado_alumnos(request):
+    alumnos = Alumno.objects.all().order_by('dni') # QuerySet
+
+    contexto = {
+        'alumnos': alumnos,
+        'cuota_al_dia': True
+    }
+
+    return render(request, 'web/listado_alumnos.html', contexto)
+
 
 def listado_jugadores(request):
     

@@ -43,13 +43,23 @@
     {% comment %} <h1 class="centered">Bienvenidos a FutbolConnect</h1>
     <h2 class="centered">Aplicación de contacto entre Representantes y Jugadores</h2> {% endcomment %}
     <nav>
-        <ul>
+       <!--- <ul>
             <li><a href="{% url 'index' %}">Home</a></li>
             <li><a href="{% url 'listado_jugadores' %}">Listado_jugadores</a></li>
             <li><a href="{% url 'alta_jugador' %}">Alta_jugadores</a></li>
             <li><a href="{% url 'contacto' %}">Contacto</a></li>
-        </ul>
+        </ul>-->
+        <ul>
+            <li><a class="button" href="{% url 'index' %}">Index</a></li>
+            {% if user.is_authenticated %}<li><a class="button" href="{% url 'listado_jugadores' %}">Listado de Jugadores</a></li>{% endif %}
+            {% if perms.web.add_alumno %}<li><a class="button" href="{% url 'alta_jugador' %}">Alta de jugador</a></li>{% endif %}
+            
+        </ul>    
     </nav>
+    <div class="actions">
+        {% if not user.is_authenticated %}<a class="login button" href="{% url 'login' %}">Login</a> {%endif%}
+        {% if user.is_authenticated %}<a class="logout button" href="{% url 'logout' %}">Logout</a> {%endif%}
+    </div>
 
     {% if messages %}
     <ul class="messages">
