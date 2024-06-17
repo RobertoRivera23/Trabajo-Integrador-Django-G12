@@ -58,6 +58,16 @@ header nav ul li a {
     color: white;
 }
 
+/* Actions (login/logout) styles */
+.actions {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.actions .button {
+    margin-left: 10px;
+}
+
 header .actions a {
     border: none;
     text-decoration: none;
@@ -75,11 +85,15 @@ header .actions .login:hover {
 }
 
 header .messages {
+    position: fixed;
+    top: 100px;
+    right: 15px;
+    /*
     position: absolute;
     top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
-    
+    */
     border-radius: 5px;
 }
 
