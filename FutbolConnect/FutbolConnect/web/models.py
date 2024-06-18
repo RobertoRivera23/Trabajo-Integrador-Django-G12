@@ -15,11 +15,12 @@ class Persona(models.Model):
     def __str__(self):
         return f"{self.nombre_completo()} | DNI: {self.dni}"
 
-# ver como agregar un choice
+# opciones para el choice de jugador
 opciones = [
     (1, "Si"),
     (2, "No")
 ]
+
 class Jugador(Persona):
     Estado = models.IntegerField(
         verbose_name="Pase del club", 
@@ -44,11 +45,16 @@ class Clausula(models.Model):
     def __str__(self):
         return self.clausula
     
-
+#validators=[MinValueValidator(0), MaxValueValidator(100)]
+opciones_tipo_contrato = [
+    (1, "Amateur"), 
+    (2, "Profesional")
+]
 class TipoContratos(models.Model):
     nombre = models.CharField(max_length=100, verbose_name="Nombre")
     descripcion = models.CharField(max_length=200, verbose_name="Descripción")
-    tipo_contrato = models.IntegerField(verbose_name="Amateur o Profesional", validators=[MinValueValidator(0), MaxValueValidator(100)])
+    tipo_contrato = models.IntegerField(verbose_name="Amateur o Profesional", null=False, blank=False,
+                                        choices=opciones_tipo_contrato)
     fecha_inicio = models.DateField(verbose_name="Fecha de inicio")
     fecha_fin = models.DateField(verbose_name="Fecha de finalización")
     clausula = models.ForeignKey(Clausula, on_delete=models.CASCADE, null=True, blank=True)
