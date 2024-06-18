@@ -22,13 +22,21 @@ opciones = [
 ]
 
 class Jugador(Persona):
-    Estado = models.IntegerField(
+    estado = models.IntegerField(
         verbose_name="Pase del club", 
-        unique=True, null=True, blank=True,
+        unique=True, null=False, blank=False,
         choices=opciones)
+    mail = models.EmailField(verbose_name="E-mail: ", unique=False, null=False, blank=True)
 
     def __str__(self):
-        return f"{self.nombre_completo()} | DNI: {self.dni} | Pase: {self.Estado}"
+        return f"{self.nombre_completo()} | DNI: {self.dni} | Pase: {self.estado} Pase: {self.mail}"
+
+class Representante(Persona):
+    cuit = models.BigIntegerField(verbose_name="CUIT", unique=True, null= False, blank=False,
+                                  validators=[MinValueValidator(9999999999), MaxValueValidator(9999999999)])
+
+    def __str__(self):
+        return f"{self.nombre_completo()} | DNI: {self.dni} | Pase: {self.cuit}"
 
 
 class Paises(models.Model):
@@ -46,12 +54,15 @@ class Clausula(models.Model):
         return self.clausula
     
 #validators=[MinValueValidator(0), MaxValueValidator(100)]
+
+#opciones tipo de contrato
 opciones_tipo_contrato = [
     (1, "Amateur"), 
     (2, "Profesional")
 ]
 class TipoContratos(models.Model):
     nombre = models.CharField(max_length=100, verbose_name="Nombre")
+    #posicion = models.IntegerField(max_length=100, verbose_name="Posición")
     descripcion = models.CharField(max_length=200, verbose_name="Descripción")
     tipo_contrato = models.IntegerField(verbose_name="Amateur o Profesional", null=False, blank=False,
                                         choices=opciones_tipo_contrato)
@@ -60,7 +71,7 @@ class TipoContratos(models.Model):
     clausula = models.ForeignKey(Clausula, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.nombre} | Clausula: {self.clausula} | Descripción: {self.descripcion}"
+        return f"Contrato Tipo: {self.tipo_contrato} | Jugador: {self.nombre} | Clausula: {self.clausula} | Descripción: {self.descripcion}"
 
 
 class Posicion_Jugador(models.Model):
