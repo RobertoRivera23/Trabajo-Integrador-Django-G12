@@ -15,12 +15,19 @@ class Persona(models.Model):
     def __str__(self):
         return f"{self.nombre_completo()} | DNI: {self.dni}"
 
-
+# ver como agregar un choice
+opciones = [
+    (1, "Si"),
+    (2, "No")
+]
 class Jugador(Persona):
-    LE = models.IntegerField(verbose_name="Pase del club", unique=True, null=True)
+    Estado = models.IntegerField(
+        verbose_name="Pase del club", 
+        unique=True, null=True, blank=True,
+        choices=opciones)
 
     def __str__(self):
-        return f"{self.nombre_completo()} | DNI: {self.dni} | LE: {self.LE}"
+        return f"{self.nombre_completo()} | DNI: {self.dni} | Pase: {self.Estado}"
 
 
 class Paises(models.Model):
@@ -56,6 +63,7 @@ class Posicion_Jugador(models.Model):
     def __str__(self):
         return self.posicion
 
+#opciones para posiciones de los  jugadores
 
 class Inscripcion(models.Model):
     jugador = models.ForeignKey(Jugador, on_delete=models.CASCADE)
