@@ -65,6 +65,22 @@ def listado_jugadores(request):
 
     return render(request, 'web/listado_jugadores.html', context)
 
+@login_required
+def listado_representates(request):
+    
+    context ={
+        'nombre': 'Daniel, Pavon',
+        'representates':[
+            'Thiago Messi',
+            'Hernan Hipolito',
+            'Sarmiento',
+        ],
+        'cuota_al_dia': True
+
+    }
+
+    return render(request, 'web/listado_representantes.html', context)
+
 def contacto(request):
 
     context = {
@@ -106,3 +122,39 @@ def alta_jugador(request):
             #return redirect('index') #Se lo saco para probar
        
     return render(request, '../templates/web/alta_jugador.html', context)
+
+
+def alta_representante(request):
+    context = {}
+
+    if request.method == "GET":
+        context['alta_representante_form'] = forms.AltaRepresentanteForm() 
+   
+    else: # En caso de que no sea GET, paso con datos que me paso el usuario
+        form = forms.AltaRepresentanteForm(request.POST)
+        context['alta_representante_form'] = form 
+        
+        # Validar el form
+        if form.is_valid():
+        # Si el form es correcto
+        # Lo redirijo a una vista segura por ejemplo el index
+
+            nuevo_representante = Representante(
+                nombre = form.cleaned_data['nombre'], 
+                apellido = form.cleaned_data['apellido'], 
+                dni = form.cleaned_data['dni'], 
+                cuit = form.cleaned_data['cuit']
+            )
+
+            nuevo_representante.save()
+
+
+
+
+            messages.success (request, 'El Representante fue dado de alta con éxito')
+
+            print(request.POST)
+            
+            #return redirect('index') #Se lo saco para probar
+       
+    return render(request, '../templates/web/alta_representante.html', context)

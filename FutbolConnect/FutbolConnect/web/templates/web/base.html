@@ -46,7 +46,9 @@
         <ul>
             <li><a class="button" href="{% url 'index' %}">Home</a></li>
             {% if user.is_authenticated %}<li><a class="button" href="{% url 'listado_jugadores' %}">Listado de Jugadores</a></li>{% endif %}
-            {% if perms.web.add_alumno %}<li><a class="button" href="{% url 'alta_jugador' %}">Alta de jugador</a></li>{% endif %}
+            {% if perms.web.add_jugador %}<li><a class="button" href="{% url 'alta_jugador' %}">Alta de jugador</a></li>{% endif %}
+            {% if perms.web.add_representante %}<li><a class="button" href="{% url 'alta_representante' %}">Alta de representante</a></li>{% endif %} 
+            {% if user.is_authenticated %}<li><a class="button" href="{% url 'listado_representantes' %}">Listado de Representantes</a></li>{% endif %}
             <li><a class="button" href="{% url 'contacto' %}">Contacto</a></li>
         </ul>    
     </nav>

@@ -22,6 +22,15 @@ class AltaJugadorForm(forms.Form):
     telefono = forms.CharField(label="Teléfono", required=True)
     correo = forms.EmailField(label="Email", required=True)
     
+class AltaRepresentanteForm(forms.Form):
+    nombre = forms.CharField(label="Nombre", required=True,widget=forms.TextInput(attrs={'class': 'campo_azul'}))
+    apellido = forms.CharField(label="Apellido", required=True)
+    dni = forms.IntegerField(label="DNI", required=True) 
+    #fecha_nacimiento = forms.DateField(label="Fecha de Nacimiento", required=True) #Lo sacamos para Probar sin Fecha de Nacimiento
+    #categoria = forms.CharField(label="Categoría", required=True)
+    direccion = forms.CharField(label="Dirección", required=True)
+    telefono = forms.CharField(label="Teléfono", required=True)
+    correo = forms.EmailField(label="Email", required=True)
 
     def clean_nombre(self):
         if not self.cleaned_data["nombre"].isalpha():
