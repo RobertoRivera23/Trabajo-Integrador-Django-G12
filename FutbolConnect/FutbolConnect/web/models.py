@@ -24,9 +24,9 @@ opciones = [
 class Jugador(Persona):
     estado = models.IntegerField(
         verbose_name="Pase del club", 
-        unique=True, null=False, blank=False,
+        unique=True, null=True, blank=True,
         choices=opciones)
-    mail = models.EmailField(verbose_name="E-mail: ", unique=False, null=False, blank=True)
+    mail = models.EmailField(verbose_name="E-mail: ", null=True, blank=True)
 
     def __str__(self):
         return f"{self.nombre_completo()} | DNI: {self.dni} | Pase: {self.estado} Pase: {self.mail}"
@@ -83,7 +83,7 @@ class Posicion_Jugador(models.Model):
 #opciones para posiciones de los  jugadores
 
 class Inscripcion(models.Model):
-    jugador = models.ForeignKey(Jugador, on_delete=models.CASCADE)
+    jugador = models.ForeignKey(Jugador, on_delete=models.CASCADE, null= True, blank=True)
     posicion_jugador = models.ForeignKey(Posicion_Jugador, on_delete=models.CASCADE, null=True, blank=True)
     fecha_inscripcion = models.DateField(verbose_name="Fecha de inscripción", auto_now_add=True)
 

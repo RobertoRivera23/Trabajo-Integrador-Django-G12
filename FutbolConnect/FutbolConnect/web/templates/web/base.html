@@ -35,7 +35,7 @@
         {{ form.dni.errors }}
         {{ form.dni }}
         <!-- Acá Agregar los demás campos de la misma manera -->
-        <button type="submit">Enviar</button>
+        <!-- <button type="submit">Enviar</button> -->
     </form>
 
 
@@ -43,17 +43,11 @@
     {% comment %} <h1 class="centered">Bienvenidos a FutbolConnect</h1>
     <h2 class="centered">Aplicación de contacto entre Representantes y Jugadores</h2> {% endcomment %}
     <nav>
-       <ul>
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="{% url 'listado_jugadores' %}">Listado_jugadores</a></li>
-            <li><a href="{% url 'alta_jugador' %}">Alta_jugadores</a></li>
-            <li><a href="{% url 'contacto' %}">Contacto</a></li>
-        </ul>
         <ul>
-            <li><a class="button" href="{% url 'index' %}">Index</a></li>
+            <li><a class="button" href="{% url 'index' %}">Home</a></li>
             {% if user.is_authenticated %}<li><a class="button" href="{% url 'listado_jugadores' %}">Listado de Jugadores</a></li>{% endif %}
             {% if perms.web.add_alumno %}<li><a class="button" href="{% url 'alta_jugador' %}">Alta de jugador</a></li>{% endif %}
-            
+            <li><a class="button" href="{% url 'contacto' %}">Contacto</a></li>
         </ul>    
     </nav>
     

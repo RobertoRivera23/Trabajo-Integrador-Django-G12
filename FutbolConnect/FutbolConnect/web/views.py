@@ -50,17 +50,6 @@ def alumnos_por_año(request, year):
     return HttpResponse(f"listado de alumnos: {year} \n {alumnos}")
 
 @login_required
-def listado_alumnos(request):
-    alumnos = Alumno.objects.all().order_by('dni') # QuerySet
-
-    contexto = {
-        'alumnos': alumnos,
-        'cuota_al_dia': True
-    }
-
-    return render(request, 'web/listado_alumnos.html', contexto)
-
-
 def listado_jugadores(request):
     
     context ={
@@ -103,7 +92,6 @@ def alta_jugador(request):
                 nombre = form.cleaned_data['nombre'], 
                 apellido = form.cleaned_data['apellido'], 
                 dni = form.cleaned_data['dni'], 
-                LE = form.cleaned_data['dni'] + 10000
             )
 
             nuevo_jugador.save()
