@@ -1,14 +1,14 @@
 
 from django.contrib import admin
-from .models import Jugador, Paises, TipoContratos, Inscripcion, Representante
+from .models import Jugador, Paises, TipoContratos, Contrato, Representante
 
 
 # Register your models with the default admin site
 admin.site.register(Jugador)
 admin.site.register(Representante)
-admin.site.register(Paises)
+#admin.site.register(Paises)
 admin.site.register(TipoContratos)
-admin.site.register(Inscripcion)
+admin.site.register(Contrato)
 
 
 # Create a custom admin site for RepresentanteDeJugadores

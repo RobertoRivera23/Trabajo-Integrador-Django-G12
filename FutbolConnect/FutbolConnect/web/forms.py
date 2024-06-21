@@ -1,6 +1,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from django.forms.utils import ErrorList
+from .models import Jugador, Representante, TipoContratos, Contrato, opciones, opciones_posicion, opciones_tipo_contrato 
+
 
 class CustomErrorList(ErrorList):
     def __str__(self):
@@ -11,13 +13,16 @@ class CustomErrorList(ErrorList):
             return ''
         return '<div class="errorlist">%s</div>' % ''.join(['<div class="error">%s</div>' % e for e in self])
 
+
+
 class AltaJugadorForm(forms.Form):
     nombre = forms.CharField(label="Nombre", required=True,widget=forms.TextInput(attrs={'class': 'campo_azul'}))
     apellido = forms.CharField(label="Apellido", required=True)
     dni = forms.IntegerField(label="DNI", required=True) 
-    #fecha_nacimiento = forms.DateField(label="Fecha de Nacimiento", required=True) #Lo sacamos para Probar sin Fecha de Nacimiento
+    fecha_nacimiento = forms.DateField(label="Fecha de Nacimiento", required=True) #Lo sacamos para Probar sin Fecha de Nacimiento
     categoria = forms.CharField(label="Categoría", required=True)
-    posicion = forms.CharField(label="Posición", required=True),
+    posicion = forms.ChoiceField(label="Posición", required=True, choices=opciones_posicion)
+    pais = forms.CharField(label="País", required=True)
     direccion = forms.CharField(label="Dirección", required=True)
     telefono = forms.CharField(label="Teléfono", required=True)
     correo = forms.EmailField(label="Email", required=True)
@@ -26,8 +31,6 @@ class AltaRepresentanteForm(forms.Form):
     nombre = forms.CharField(label="Nombre", required=True,widget=forms.TextInput(attrs={'class': 'campo_azul'}))
     apellido = forms.CharField(label="Apellido", required=True)
     dni = forms.IntegerField(label="DNI", required=True) 
-    #fecha_nacimiento = forms.DateField(label="Fecha de Nacimiento", required=True) #Lo sacamos para Probar sin Fecha de Nacimiento
-    #categoria = forms.CharField(label="Categoría", required=True)
     direccion = forms.CharField(label="Dirección", required=True)
     telefono = forms.CharField(label="Teléfono", required=True)
     correo = forms.EmailField(label="Email", required=True)
