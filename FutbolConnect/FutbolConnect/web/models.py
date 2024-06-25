@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+import datetime
 
 #Clase padre con atributos comunes para Jugadores y Representantes
 class Persona(models.Model):
@@ -42,16 +43,16 @@ opciones_posicion = [
 class Jugador(Persona):
     estado = models.IntegerField(
         verbose_name="Pase del club", 
-        unique=True, null=True, blank=True,
+        null=True, blank=True,
         choices=opciones)
-    fecha_nacimiento = models.DateField(verbose_name="Fecha de Nacimiento"),
+    fecha_nacimiento = models.DateField(verbose_name="Fecha_nacimiento", null=True)
     categoria = models.CharField(verbose_name="Categoría")
     posicion = models.IntegerField(verbose_name="Posición Contratada: ", null=False, blank=False, 
                                    choices=opciones_posicion)
     pais = models.CharField(verbose_name="País")
    
     def __str__(self):
-        return f"{self.nombre_completo()} | DNI: {self.dni} | Pase: {self.estado} | Posición: {self.posicion} | email: {self.mail}" 
+        return f"nombre: {self.nombre_completo()} | DNI: {self.dni} | F.Nac.: {self.fecha_nacimiento} | Pase: {self.estado} | Posición: {self.posicion} | email: {self.mail}" 
    
     #Lo sacamos para Probar sin Fecha de Nacimiento
     
@@ -60,8 +61,7 @@ class Jugador(Persona):
     
 #Clase representante que hereda de persona y devuelve (atributos de persona y representante)
 class Representante(Persona):
-    cuit = models.BigIntegerField(verbose_name="CUIT", unique=True, null= False, blank=False,
-                                  validators=[MinValueValidator(9999999999), MaxValueValidator(99999999999)])
+    cuit = models.BigIntegerField(verbose_name="CUIT", unique=True, null=False, blank=False)
 
     def __str__(self):
         return f"{self.nombre_completo()} | DNI: {self.dni} | Pase: {self.cuit}"
@@ -110,10 +110,10 @@ class TipoContratos(models.Model):
 #opciones para posiciones de los  jugadores
 
 class Contrato(models.Model):
-    jugador = models.ForeignKey(Jugador, on_delete=models.CASCADE)
+    jugador = models.ForeignKey(Jugador, on_delete=models.CASCADE, null=True) #uno a muhos
     fecha_contratacion = models.DateField(verbose_name="Fecha de contratación", auto_now_add=True)
     representante = models.ForeignKey(Representante, on_delete=models.CASCADE)
-    TipoContratos = models.ForeignKey(TipoContratos, on_delete=models.CASCADE)
+    TipoContratos = models.ManyToManyField(TipoContratos)#muchos a muchos (contrato muchos tipos)
     
     class Meta:
         db_table = 'contrato'

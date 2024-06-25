@@ -20,20 +20,17 @@
         {% endif %}
     
         <a href="{% url 'index' %}">volver</a>
-    
+        
         <section>
-            {% for representantes in representantes %}
+            {% for representante in representante %}
             <article>
-                <p>{{ representantes | upper}}</p>
+                <p>{{ representante | upper }}</p>
             </article>
     
             {% empty %}
                <article>
-                    <p>No hay Representantes cargados</p>
-    
+                    <p>No hay jugadores cargados</p>
                </article>
-    
-    
     
             {% endfor %}
     

@@ -3,7 +3,7 @@ from django.http import HttpResponse
 import datetime
 from . import forms
 from django.contrib import messages
-from .models import Jugador
+from .models import Jugador, Representante
 
 
 from django.views.generic.list import ListView
@@ -49,37 +49,27 @@ def alumnos_por_año(request, year):
     alumnos = ["Carlos", "Maria", "Jose"] # """"Levanta""""" los usuarios de la BBDD
     return HttpResponse(f"listado de alumnos: {year} \n {alumnos}")
 
+jugadores = Jugador.objects.all().order_by('nombre') #QuerySet
 @login_required
 def listado_jugadores(request):
     
     context ={
-         'nombre': 'Daniel, Pavon',
-        'jugadores':[
-            'Lionel Messi',
-            'Diego Armando Maradona',
-            'DiMaria',
-        ],
+        'jugadores': jugadores,
         'cuota_al_dia': True
-
     }
-
     return render(request, 'web/listado_jugadores.html', context)
 
+
+representantes = Representante.objects.all()
 @login_required
-def listado_representates(request):
+def listado_representantes(request):
     
     context ={
-        'nombre': 'Daniel, Pavon',
-        'representates':[
-            'Thiago Messi',
-            'Hernan Hipolito',
-            'Sarmiento',
-        ],
+        'representates': representantes,
         'cuota_al_dia': True
-
     }
-
     return render(request, 'web/listado_representantes.html', context)
+
 
 def contacto(request):
 
@@ -102,24 +92,26 @@ def alta_jugador(request):
         # Validar el form
         if form.is_valid():
         # Si el form es correcto
-        # Lo redirijo a una vista segura por ejemplo el index
-
             nuevo_jugador = Jugador(
                 nombre = form.cleaned_data['nombre'], 
                 apellido = form.cleaned_data['apellido'], 
                 dni = form.cleaned_data['dni'], 
+                fecha_nacimiento = form.cleaned_data['fecha_nacimiento'], 
+                categoria = form.cleaned_data['categoria'], 
+                posicion = form.cleaned_data['posicion'], 
+                pais = form.cleaned_data['pais'], 
+                direccion = form.cleaned_data['direccion'], 
+                telefono = form.cleaned_data['telefono'], 
+                mail = form.cleaned_data['mail'] 
             )
 
             nuevo_jugador.save()
 
-
-
-
             messages.success (request, 'El Jugador fue dado de alta con éxito')
 
-            print(request.POST)
-            
-            #return redirect('index') #Se lo saco para probar
+            #print(request.POST)
+         # Lo redirijo a una vista segura por ejemplo el index     
+            return redirect('index')
        
     return render(request, '../templates/web/alta_jugador.html', context)
 
