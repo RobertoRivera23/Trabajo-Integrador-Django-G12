@@ -6,7 +6,12 @@
 
 {% block main %}  
     <h2>Contacto</h2>
-    <p>Bienvenid@ {{nombre}}</p>
     <p>{{fecha_hora}}</p>
     <a href="{% url 'index' %}"> Volver </a>
+
+    <form action= "{% url 'contacto' %}" method="POST">
+        {% csrf_token %}
+        {{envio_contacto_form}} 
+        <input type='submit' value="contactar">  
+    </form>
 {% endblock %}

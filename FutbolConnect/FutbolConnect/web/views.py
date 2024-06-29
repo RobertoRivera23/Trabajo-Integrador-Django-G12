@@ -1,9 +1,9 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-import datetime
+from datetime import *
 from . import forms
 from django.contrib import messages
-from .models import Jugador, Representante
+from .models import Jugador, Representante, Contacto, Contrato, TipoContratos
 
 
 from django.views.generic.list import ListView
@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 #from .forms import *
-from .models import Jugador, Paises
+
 
 
 
@@ -23,7 +23,7 @@ def index(request):
 
     context ={
         'nombre': 'Daniel, Pavon',
-        'fecha_hora': datetime.datetime.now()
+        #'fecha_hora': datetime.datetime.now()
           }
     
     return render(request, '../templates/web/index.html', context)
@@ -50,6 +50,7 @@ def alumnos_por_año(request, year):
     return HttpResponse(f"listado de alumnos: {year} \n {alumnos}")
 
 jugadores = Jugador.objects.all().order_by('nombre') #QuerySet
+
 @login_required
 def listado_jugadores(request):
     
@@ -63,21 +64,45 @@ def listado_jugadores(request):
 representantes = Representante.objects.all()
 @login_required
 def listado_representantes(request):
-    
+
     context ={
-        'representates': representantes,
+        'representantes': representantes,
         'cuota_al_dia': True
     }
     return render(request, 'web/listado_representantes.html', context)
 
 
 def contacto(request):
+    context = {}
 
-    context = {
-        'nombre': 'Daniel, Pavon',
-        'fecha_hora': datetime.datetime.now()
-    }
+    if request.method == "GET":
+        context['envio_contacto_form'] = forms.ContactoForm()
+   
+    else: # En caso de que no sea GET, paso con datos que me paso el usuario
+        form = forms.ContactoForm(request.POST)
+        context['envio_contacto_form'] = form 
+        
+        # Validar el form
+        if form.is_valid():
+        # Si el form es correcto
+            nuevo_contacto = Contacto(
+            nombre = form.cleaned_data['nombre'], 
+            apellido = form.cleaned_data['apellido'], 
+            mail = form.cleaned_data['mail'],
+            #fecha_hora = form.cleaned_data['Fecha de consulta'] 
+            )
+
+            nuevo_contacto.save()
+
+            messages.success (request, 'Su petición de contacto fue realizada con éxito')
+
+            #print(request.POST)
+         # Lo redirijo a una vista segura por ejemplo el index     
+            return redirect('index')
+       
     return render(request, '../templates/web/contacto.html', context)
+
+    
 
 def alta_jugador(request):
     context = {}
@@ -109,7 +134,6 @@ def alta_jugador(request):
 
             messages.success (request, 'El Jugador fue dado de alta con éxito')
 
-            #print(request.POST)
          # Lo redirijo a una vista segura por ejemplo el index     
             return redirect('index')
        
@@ -129,8 +153,6 @@ def alta_representante(request):
         # Validar el form
         if form.is_valid():
         # Si el form es correcto
-        # Lo redirijo a una vista segura por ejemplo el index
-
             nuevo_representante = Representante(
                 nombre = form.cleaned_data['nombre'], 
                 apellido = form.cleaned_data['apellido'], 
@@ -140,13 +162,55 @@ def alta_representante(request):
 
             nuevo_representante.save()
 
-
-
-
             messages.success (request, 'El Representante fue dado de alta con éxito')
 
-            print(request.POST)
-            
-            #return redirect('index') #Se lo saco para probar
+            return redirect('index') 
        
     return render(request, '../templates/web/alta_representante.html', context)
+                    #Contratos
+# Listado de Contratos
+contratos = TipoContratos.objects.all() 
+
+@login_required
+def listado_contratos(request):
+    
+    context ={
+        'contratos': contratos,
+    }
+    return render(request, 'web/lista_contratos.html', context)
+ 
+#  Alta
+def alta_contrato(request):
+    context = {}
+
+    if request.method == "GET":
+        context['alta_contrato_form'] = forms.AltaContratoForm()
+   
+    else: # En caso de que no sea GET, paso con datos que me paso el usuario
+        form = forms.AltaContratoForm(request.POST)
+        context['alta_contrato_form'] = form 
+        
+        # Validar el form
+        if form.is_valid():
+        # Si el form es correcto
+            nuevo_contrato = TipoContratos(
+                nombre = form.cleaned_data['nombre'],
+                tipo_contrato = form.cleaned_data['tipo de contrato'],
+                descripcion = form.cleaned_data['descripcion'],
+                posicion_contratado = form.cleaned_data['posicion contratada'],
+                fecha_inicio = form.cleaned_data['fecha de inicio'],
+                fecha_fin = form.cleaned_data['fecha de fin'],
+                clausula = form.cleaned_data['clausula'],
+                monto = form.cleaned_data['monto'],
+                representante = form.cleaned_data['representante'],
+                jugadores = form.cleaned_data['jugador']
+            )
+
+            nuevo_contrato.save()
+
+            messages.success (request, 'El Contrato fue realizado con éxito')
+
+         # Lo redirijo a una vista segura por ejemplo el index     
+            return redirect('index')
+       
+    return render(request, '../templates/web/alta_contrato.html', context)

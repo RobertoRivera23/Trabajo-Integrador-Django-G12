@@ -15,7 +15,7 @@ class Persona(models.Model):
         abstract = True
     # Metodo que retornara nombre y apellido
     def nombre_completo(self):
-        return f"{self.nombre} {self.apellido}"
+        return f"{self.apellido} {self.nombre}"
 
     def __str__(self):
         return f"{self.nombre_completo()} | DNI: {self.dni} | dirección: {self.direccion} | teléfono: {self.telefono} | email: {self.mail}"
@@ -47,7 +47,8 @@ class Jugador(Persona):
         choices=opciones)
     fecha_nacimiento = models.DateField(verbose_name="Fecha_nacimiento", null=True)
     categoria = models.CharField(verbose_name="Categoría")
-    posicion = models.IntegerField(verbose_name="Posición Contratada: ", null=False, blank=False, 
+    posicion = models.IntegerField(verbose_name="Posición Contratada: ", 
+                                   null=True, blank=True, 
                                    choices=opciones_posicion)
     pais = models.CharField(verbose_name="País")
    
@@ -64,23 +65,8 @@ class Representante(Persona):
     cuit = models.BigIntegerField(verbose_name="CUIT", unique=True, null=False, blank=False)
 
     def __str__(self):
-        return f"{self.nombre_completo()} | DNI: {self.dni} | Pase: {self.cuit}"
+        return f"{self.nombre_completo()} | DNI: {self.dni} | CUIT: {self.cuit}"
 
-
-class Paises(models.Model):
-    pais = models.CharField(max_length=100, verbose_name="País", unique=True)
-    ciudad = models.CharField(max_length=100, verbose_name="Ciudad", null=True, blank=True)
-
-    def __str__(self):
-        return f"{self.pais} | Ciudad: {self.ciudad}"
-
-#Se redactan las clausulas especiales del contrato
-class Clausula(models.Model):
-    Clausula = models.CharField(max_length=1000, verbose_name="Clausula", unique=True)
-
-    def __str__(self):
-        return self.clausula
-    
 
 #opciones tipo de contrato
 opciones_tipo_contrato = [
@@ -89,39 +75,48 @@ opciones_tipo_contrato = [
     (3, "Profesional")
 ]
 
-
-
 #
 class TipoContratos(models.Model):
     nombre = models.CharField(max_length=100, verbose_name="Nombre")
-    tipo_contrato = models.IntegerField(verbose_name="Amateur o Profesional", null=False, blank=False,
+    tipo_contrato = models.IntegerField(verbose_name="Amateur o Profesional", 
+                                        null=False, blank=False,
                                         choices=opciones_tipo_contrato)
     descripcion = models.CharField(max_length=200, verbose_name="Descripción")
-    posicion_contratado = models.IntegerField(verbose_name="Posición Contratada: ", null=False, blank=False, 
-                                   choices=opciones_posicion)
+    posicion_contratado = models.IntegerField(verbose_name="Posición Contratada ", 
+                                              null=False, blank=False, 
+                                              choices=opciones_posicion)
     fecha_inicio = models.DateField(verbose_name="Fecha de inicio")
     fecha_fin = models.DateField(verbose_name="Fecha de finalización")
-    clausula = models.ForeignKey(Clausula, on_delete=models.CASCADE, null=True, blank=True)
+    clausula = models.CharField(max_length=1000, verbose_name="Clausula")
+    monto = models.IntegerField(verbose_name="Monto")
+    representante = models.ForeignKey(Representante, on_delete=models.CASCADE, null=True, blank=True) #un repre muchos contratos
+    jugadores = models.ManyToManyField(Jugador, through='Contrato')
 
     def __str__(self):
-        return f"Contrato Tipo: {self.tipo_contrato} | Jugador: {self.nombre} | Clausula: {self.clausula} | Posición Contratada: {self.posicion_contratado} | Descripción: {self.descripcion}"
+        return f"Contrato Tipo: {self.tipo_contrato} | Clausula: {self.clausula} | Posición Contratada: {self.posicion_contratado} | Descripción: {self.descripcion} | Representante: {self.representantes}"
 
-
-#opciones para posiciones de los  jugadores
-
+#Tabla intermedia
 class Contrato(models.Model):
-    jugador = models.ForeignKey(Jugador, on_delete=models.CASCADE, null=True) #uno a muhos
+    jugador = models.ForeignKey(Jugador, on_delete=models.CASCADE)
+    TipoContratos = models.ForeignKey(TipoContratos, on_delete=models.CASCADE)
     fecha_contratacion = models.DateField(verbose_name="Fecha de contratación", auto_now_add=True)
-    representante = models.ForeignKey(Representante, on_delete=models.CASCADE)
-    TipoContratos = models.ManyToManyField(TipoContratos)#muchos a muchos (contrato muchos tipos)
-    
-    class Meta:
-        db_table = 'contrato'
+        
+   # class Meta:
+    #    db_table = 'Contrato'
 
-    def __str__(self):
-        return f"Contrato de {self.jugador.nombre_completo()} | en posición: {self.jugador.posicion} | Representante: {self.representante.nombre_completo} | tipo de contratación: {self.TipoContratos.tipo_contrato}"
+    #def __str__(self):
+     #   return f"Contrato de {self.jugador.nombre_completo()} | en posición: {self.jugador.posicion} | Representante: {self.representante.nombre_completo} | tipo de contratación: {self.TipoContratos.tipo_contrato}"
   
-
+#Fomulario de Contacto VEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRr
+class Contacto(models.Model):
+    nombre = models.CharField(max_length=100, verbose_name="Nombre")
+    apellido = models.CharField(max_length=100, verbose_name="Apellido")
+    mail = models.EmailField(verbose_name="Email", null=False, blank=True)
+    fecha_Hora = models.DateField(verbose_name="Fecha de contacto", auto_now_add=True)
+    
+    def __str__(self):
+        return f"Nombre: {self.nombre} | Apellido: {self.apellido} | Email: {self.email} | Fecha y Hora: {self.fecha_Hora}"
+  
 
 ############################ Hasta aca teniamos #####################################
 

@@ -6,7 +6,9 @@
 
 {% block main %}  
 
-    <p>Usuario:{{nombre}}</p>
+{% if user.is_authenticated %}
+<h2>Usuario: {{ user.username }}</h2>
+{% endif %}
     <h1>Listado de Representantes</h1>
     <p>{{fecha_hora}}</p>
 
@@ -20,16 +22,15 @@
         {% endif %}
     
         <a href="{% url 'index' %}">volver</a>
-        
         <section>
-            {% for representante in representante %}
+            {% for representantes in representantes %}
             <article>
-                <p>{{ representante | upper }}</p>
+                <p>{{ representantes | upper}}</p>
             </article>
     
             {% empty %}
                <article>
-                    <p>No hay jugadores cargados</p>
+                    <p>No hay Representantes cargados</p>
                </article>
     
             {% endfor %}

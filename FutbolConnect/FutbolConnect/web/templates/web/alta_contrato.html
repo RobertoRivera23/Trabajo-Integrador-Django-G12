@@ -1,21 +1,22 @@
 {% extends "web/base.html" %}
 {% load static %}
 
-{% block title %} FC-Alta Representantes {% endblock %}
-{% block extra_css %} <link rel="stylesheet" href="{% static 'web/styles/alta_representante.css' %}"> {% endblock %}
+{% block title %} FC-Alta Contrato {% endblock %}
+{% block extra_css %} <link rel="stylesheet" href="{% static 'web/styles/alta_contrato.css' %}"> {% endblock %}
 
 {% block main %}  
-    <h2>Alta de Nuevo Representante:</h2>
-   
+    <h2>Alta de Nuevo Contrato:</h2>
+    
     {% if user.is_authenticated %}
         <h2>Bienvenid@ {{ user.username }}</h2>
     {% endif %}
     <p>{{fecha_hora}}</p>
     <a href="{% url 'index' %}"> Volver </a>
 
-    <form method="POST" action="{% url 'alta_representante' %}">
+    <form method="POST" action="{% url 'alta_contrato' %}">
         {% csrf_token %}
-        {{ alta_representante_form }}
+        {{ alta_contrato_form }}
+        
        <input type="submit" 
         class="btn btn-primary"> 
        

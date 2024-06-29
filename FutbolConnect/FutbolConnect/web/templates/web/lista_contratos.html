@@ -1,0 +1,35 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block title %} FC-Listado de Contratos {% endblock %}
+{% block extra_css %} <link rel="stylesheet" href="{% static 'web/styles/listado_contratos.css' %}">{% endblock %}
+
+{% block main %}  
+    
+{% if user.is_authenticated %}
+    <h2>Usuario: {{ user.username }}</h2>
+{% endif %}
+    <h1>Listado de Contratos</h1>
+    <p>{{fecha_hora}}</p>
+
+    <body>
+    
+        <a href="{% url 'index' %}">volver</a>
+    
+        <section>
+            {% for contratos in contratos %}
+            <article>
+                <p>{{ contratos | upper}}</p>
+            </article>
+    
+            {% empty %}
+               <article>
+                    <p>No hay contratos cargados</p>
+               </article>
+    
+            {% endfor %}
+    
+        </section>
+    </body>
+
+{% endblock %}

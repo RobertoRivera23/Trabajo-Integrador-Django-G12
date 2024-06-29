@@ -7,6 +7,9 @@
 
 {% block main %} 
     <img src="{% static 'web/images/fondo1.jpg' %}" alt="Foto del Fondo">
-    <p>Bienvenid@ {{ nombre }}</p>
+    {% if user.is_authenticated %}
+        <h2>Bienvenid@ {{ user.username }}</h2>
+    {% endif %}
+
     <p>{{ fecha_hora}}</p>
 {% endblock %}

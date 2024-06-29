@@ -5,8 +5,10 @@
 {% block extra_css %} <link rel="stylesheet" href="{% static 'web/styles/listado_jugadores.css' %}">{% endblock %}
 
 {% block main %}  
-
-    <p>Usuario:{{nombre}}</p>
+    
+{% if user.is_authenticated %}
+    <h2>Usuario: {{ user.username }}</h2>
+{% endif %}
     <h1>Listado de Jugadores</h1>
     <p>{{fecha_hora}}</p>
 
