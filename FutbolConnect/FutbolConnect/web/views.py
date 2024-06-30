@@ -45,16 +45,16 @@ def alta_jugador(request):
         context['alta_jugador_form'] = form 
         if form.is_valid():
             nuevo_jugador = Jugador(
-                nombre=form.cleaned_data['nombre'], 
-                apellido=form.cleaned_data['apellido'], 
-                dni=form.cleaned_data['dni'], 
-                fecha_nacimiento=form.cleaned_data['fecha_nacimiento'], 
-                categoria=form.cleaned_data['categoria'], 
-                posicion=form.cleaned_data['posicion'], 
-                pais=form.cleaned_data['pais'], 
-                direccion=form.cleaned_data['direccion'], 
-                telefono=form.cleaned_data['telefono'], 
-                mail=form.cleaned_data['mail'] 
+                nombre = form.cleaned_data['nombre'], 
+                apellido = form.cleaned_data['apellido'], 
+                dni = form.cleaned_data['dni'], 
+                fecha_nacimiento = form.cleaned_data['fecha_nacimiento'], 
+                categoria = form.cleaned_data['categoria'], 
+                posicion = form.cleaned_data['posicion'], 
+                pais = form.cleaned_data['pais'], 
+                direccion = form.cleaned_data['direccion'], 
+                telefono = form.cleaned_data['telefono'], 
+                mail = form.cleaned_data['mail'] 
             )
             nuevo_jugador.save()
             messages.success(request, 'El Jugador fue dado de alta con éxito')
@@ -70,10 +70,10 @@ def alta_representante(request):
         context['alta_representante_form'] = form 
         if form.is_valid():
             nuevo_representante = Representante(
-                nombre=form.cleaned_data['nombre'], 
-                apellido=form.cleaned_data['apellido'], 
-                dni=form.cleaned_data['dni'], 
-                cuit=form.cleaned_data['cuit']
+                nombre = form.cleaned_data['nombre'], 
+                apellido = form.cleaned_data['apellido'], 
+                dni = form.cleaned_data['dni'], 
+                cuit = form.cleaned_data['cuit']
             )
             nuevo_representante.save()
             messages.success(request, 'El Representante fue dado de alta con éxito')
@@ -112,16 +112,16 @@ def alta_contrato(request):
         context['alta_contrato_form'] = form 
         if form.is_valid():
             nuevo_contrato = TipoContratos(
-                nombre=form.cleaned_data['nombre'],
-                tipo_contrato=form.cleaned_data['tipo de contrato'],
-                descripcion=form.cleaned_data['descripcion'],
-                posicion_contratado=form.cleaned_data['posicion contratada'],
-                fecha_inicio=form.cleaned_data['fecha de inicio'],
-                fecha_fin=form.cleaned_data['fecha de fin'],
-                clausula=form.cleaned_data['clausula'],
-                monto=form.cleaned_data['monto'],
-                representante=form.cleaned_data['representante'],
-                jugadores=form.cleaned_data['jugador']
+                nombre = form.cleaned_data['nombre'],
+                tipo_contrato = form.cleaned_data['tipo de contrato'],
+                descripcion = form.cleaned_data['descripcion'],
+                posicion_contratado = form.cleaned_data['posicion contratada'],
+                fecha_inicio = form.cleaned_data['fecha de inicio'],
+                fecha_fin = form.cleaned_data['fecha de fin'],
+                clausula = form.cleaned_data['clausula'],
+                monto = form.cleaned_data['monto'],
+                representante = form.cleaned_data['representante'],
+                jugadores = form.cleaned_data['jugador']
             )
             nuevo_contrato.save()
             messages.success(request, 'El Contrato fue realizado con éxito')

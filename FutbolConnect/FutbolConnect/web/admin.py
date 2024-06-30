@@ -1,6 +1,6 @@
 
 from django.contrib import admin
-from .models import Jugador, TipoContratos, Representante, Contacto
+from .models import Jugador, TipoContratos, Representante, Contacto, Contrato
 
 
 # Register your models with the default admin site
@@ -8,6 +8,7 @@ admin.site.register(Jugador)
 admin.site.register(Representante)
 admin.site.register(Contacto)
 admin.site.register(TipoContratos)
+admin.site.register(Contrato)
 
 # Create a custom admin site for RepresentanteDeJugadores
 #class RepresentanteDeJugadoresAdminSite(admin.AdminSite):
