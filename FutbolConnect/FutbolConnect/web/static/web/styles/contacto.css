@@ -1,0 +1,32 @@
+/* Estilos para el menú */
+.navbar {
+    background-color: #394fdb;
+    overflow: hidden;
+}
+
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar ul li {
+    float: left;
+    margin-right: 20px; /* Espacio entre elementos del menú */
+}
+
+.navbar ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+}
+
+.navbar ul li a:hover {
+    background-color: #3c44d5;
+}
+
+.navbar ul li a.active {
+    background-color: #4CAF50;
+}

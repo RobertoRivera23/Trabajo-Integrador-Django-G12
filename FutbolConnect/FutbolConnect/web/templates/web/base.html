@@ -1,92 +1,121 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport content=width=device-width initial-scale=1.0">
-    <title>{% block title %} {% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FutbolConnect{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'web/styles/base.css' %}">
-
-    {% block extra_css %} {% endblock %}
-  
+    {% block extra_css %}{% endblock %}
     <style>
-        .errorlist {
-            color: red;
-            font-weight: bold;
+        /* Estilos para el menú */
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
         }
-        .error {
-            color: red;
-            font-weight: bold;
+
+        .navbar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            text-align: center; /* Centrar elementos del menú */
+        }
+
+        .navbar ul li {
+            display: inline; /* Mostrar los elementos en línea */
+            margin-right: 20px; /* Espacio entre elementos del menú */
+        }
+
+        .navbar ul li a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar ul li a:hover {
+            background-color: #111;
+        }
+
+        .navbar ul li a.active {
+            background-color: #4CAF50;
+        }
+
+        /* Estilos para el área de acciones (login/logout) */
+        .actions {
+            text-align: right;
+            margin-top: 10px; /* Espacio superior */
+        }
+
+        .actions a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin-left: 10px; /* Espacio entre botones */
+        }
+
+        .actions a:hover {
+            background-color: #555;
+        }
+
+        /* Estilos para las redes sociales en el pie de página */
+        .social-links {
+            margin-top: 20px; /* Espacio superior */
+        }
+
+        .social-links a {
+            margin-right: 10px; /* Espacio entre iconos */
         }
     </style>
-
-
 </head>
 
 <body>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        {{ form.nombre.errors }}
-        {{ form.nombre }}
-        {{ form.apellido.errors }}
-        {{ form.apellido }}
-        {{ form.dni.errors }}
-        {{ form.dni }}
-        <!-- Acá Agregar los demás campos de la misma manera -->
-        <!-- <button type="submit">Enviar</button> -->
-    </form>
-
-
     <header>
-    {% comment %} <h1 class="centered">Bienvenidos a FutbolConnect</h1>
-    <h2 class="centered">Aplicación de contacto entre Representantes y Jugadores</h2> {% endcomment %}
-    <nav>
-        <ul class="contenedor">
-            <li><a class="button" href="{% url 'index' %}">Home</a></li>
-            {% if user.is_authenticated %}<li><a class="button" href="{% url 'listado_jugadores' %}">Listado de Jugadores</a></li>{% endif %}
-            {% if perms.web.add_jugador %}<li><a class="button" href="{% url 'alta_jugador' %}">Alta de jugador</a></li>{% endif %}
-            {% if perms.web.add_representante %}<li><a class="button" href="{% url 'alta_representante' %}">Alta de representante</a></li>{% endif %} 
-            {% if user.is_authenticated %}<li><a class="button" href="{% url 'listado_representantes' %}">Listado de Representantes</a></li>{% endif %}
-            {% if user.is_authenticated %}<li><a class="button" href="{% url 'alta_contrato' %}">Alta Contratos</a></li>{% endif %}
-            {% if user.is_authenticated %}<li><a class="button" href="{% url 'listado_contratos' %}">Listado de Contratos</a></li>{% endif %}
-            <li><a class="button" href="{% url 'contacto' %}">Contacto</a></li>
-        </ul>    
-    </nav>
-    
-    <div class="actions" style="text-align: right;"> <!--Con esto el boton se va para la Derecha-->
-        {% if not user.is_authenticated %}
-        <a class="login button" href="{% url 'login' %}">Login</a>
+        <div class="navbar">
+            <ul>
+                <li><a href="{% url 'index' %}">Home</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'listado_jugadores' %}">Listado de Jugadores</a></li>
+                    {% if perms.web.add_jugador %}
+                        <li><a href="{% url 'alta_jugador' %}">Alta de jugador</a></li>
+                    {% endif %}
+                    {% if perms.web.add_representante %}
+                        <li><a href="{% url 'alta_representante' %}">Alta de representante</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'listado_representantes' %}">Listado de Representantes</a></li>
+                    <li><a href="{% url 'alta_contrato' %}">Alta Contratos</a></li>
+                    <li><a href="{% url 'listado_contratos' %}">Listado de Contratos</a></li>
+                {% endif %}
+                <li><a href="{% url 'contacto' %}">Contacto</a></li>
+            </ul>
+        </div>
+
+        <div class="actions">
+            {% if not user.is_authenticated %}
+                <a href="{% url 'login' %}">Login</a>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}">Logout</a>
+            {% endif %}
+        </div>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}> {{ message }}</li>
+                {% endfor %}
+            </ul>
         {% endif %}
-        {% if user.is_authenticated %}
-        <a class="logout button" href="{% url 'logout' %}">Logout</a>
-        {% endif %}
-    </div>
-
-    <!--<div class="actions">
-        {% if not user.is_authenticated %}<a class="login button" href="{% url 'login' %}">Login</a> {%endif%}
-        {% if user.is_authenticated %}<a class="logout button" href="{% url 'logout' %}">Logout</a> {%endif%}
-    </div>
--->
-
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li {% if message.tags %} class="{{message.tags}}" {%endif%}> {{message}}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-
     </header>
-    <h1 class="centered">Bienvenidos a FutbolConnect</h1>
-    <h2 class="centered">Aplicación de contacto entre Representantes y Jugadores</h2>
 
-    <main class="centered">
-    
-    {% block main %} 
-    {% endblock %}
-    </main> 
+    <main>
+        <h1 class="centered">Bienvenidos a FutbolConnect</h1>
+        <h2 class="centered">Aplicación de contacto entre Representantes y Jugadores</h2>
+
+        {% block main %}{% endblock %}
+    </main>
 
     <footer class="centered">
         <p>Grupo 12 - Todos los derechos reservados</p>
@@ -99,5 +128,6 @@
 </body>
 
 </html>
+
 
 

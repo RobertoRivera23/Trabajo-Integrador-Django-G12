@@ -79,9 +79,9 @@ WSGI_APPLICATION = 'FutbolConnect.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "FutbolConnect2",
+        "NAME": "TPI_G12",
         "USER": "postgres",
-        "PASSWORD": "Betito2386!",
+        "PASSWORD": "Daf141280",
         "HOST": "127.0.0.1",
         "PORT": "5432",
     }

@@ -107,16 +107,17 @@ class Contrato(models.Model):
     #def __str__(self):
      #   return f"Contrato de {self.jugador.nombre_completo()} | en posición: {self.jugador.posicion} | Representante: {self.representante.nombre_completo} | tipo de contratación: {self.TipoContratos.tipo_contrato}"
   
-#Fomulario de Contacto VEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRr
+#Fomulario de Contacto VEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRR
+  
 class Contacto(models.Model):
     nombre = models.CharField(max_length=100, verbose_name="Nombre")
     apellido = models.CharField(max_length=100, verbose_name="Apellido")
     mail = models.EmailField(verbose_name="Email", null=False, blank=True)
-    fecha_Hora = models.DateField(verbose_name="Fecha de contacto", auto_now_add=True)
+    fecha_hora = models.DateField(verbose_name="Fecha de contacto", auto_now_add=True)
     
     def __str__(self):
-        return f"Nombre: {self.nombre} | Apellido: {self.apellido} | Email: {self.email} | Fecha y Hora: {self.fecha_Hora}"
-  
+        return f"Nombre: {self.nombre} | Apellido: {self.apellido} | Email: {self.mail} | Fecha y Hora: {self.fecha_hora}"
+
 
 ############################ Hasta aca teniamos #####################################
 

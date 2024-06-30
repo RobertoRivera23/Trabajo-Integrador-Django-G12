@@ -1,13 +1,17 @@
 * {
-    margin: 0;
-    padding: 0;
+    margin: 40;
+    padding: 20;
+    box-sizing: border-box;
 }
 
 body {
     display: flex;
     flex-direction: column;
+    align-items: center; /* Centra el contenido horizontalmente */
+    justify-content: center;
     min-height: 100vh;
-    font-family: 'Roboto', sans-serif;
+    /*font-family: 'Roboto', sans-serif;
+ */   
 }
 
 .centered {
@@ -147,7 +151,7 @@ nav ul li a:hover {
 
 
 header {
-    background-color: rgb(70, 100, 184);
+    background-color: rgb(68, 131, 190);
 }
 
 
@@ -169,11 +173,15 @@ footer {
     background-color: rgb(43, 92, 226);
     color: white;
     text-align: center;
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    flex-direction: column; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%; /* Asegura que el footer ocupe todo el ancho */
+    padding: 15px; /* Añade un padding para espacio interno */
+    box-sizing: border-box; /* Asegura que el padding no incremente el tamaño total */
 }
+
 
 
 .social-links {
