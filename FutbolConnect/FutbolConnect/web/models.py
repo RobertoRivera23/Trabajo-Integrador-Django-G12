@@ -3,22 +3,6 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 import datetime
 
 #Clase padre con atributos comunes para Jugadores y Representantes
-class Persona(models.Model):
-    nombre = models.CharField(max_length=100, verbose_name="Nombre", null=False)
-    apellido = models.CharField(max_length=100, verbose_name="Apellido")
-    dni = models.IntegerField(verbose_name="DNI", unique=True)
-    direccion = models.CharField(verbose_name="Dirección", null=False)
-    telefono = models.CharField(verbose_name="Teléfono", null=False)    
-    mail = models.EmailField(verbose_name="Email", null=False, blank=True)
-
-    class Meta:
-        abstract = True
-    # Metodo que retornara nombre y apellido
-    def nombre_completo(self):
-        return f"{self.apellido} {self.nombre}"
-
-    def __str__(self):
-        return f"{self.nombre_completo()} | DNI: {self.dni} | dirección: {self.direccion} | teléfono: {self.telefono} | email: {self.mail}"
 
 # opciones para el choice de jugador
 opciones = [
@@ -26,6 +10,22 @@ opciones = [
     (2, "Si"),
     (3, "No")
 ]
+class Persona(models.Model):
+    nombre = models.CharField(max_length=100, verbose_name="Nombre", null=False)
+    apellido = models.CharField(max_length=100, verbose_name="Apellido")
+    dni = models.IntegerField(verbose_name="DNI", unique=True)
+    direccion = models.CharField(verbose_name="Dirección", null=False)
+    telefono = models.CharField(verbose_name="Teléfono", null=False)    
+    mail = models.EmailField(verbose_name="Email", null=False, blank=True)
+    activo = models.BooleanField("Activo", default=True, null=False)
+    class Meta:
+        abstract = True
+    # Metodo que retornara nombre y apellido
+    def nombre_completo(self):
+        return f"{self.apellido} {self.nombre}"
+
+    def __str__(self):
+        return f"{self.nombre_completo()} | DNI: {self.dni} | dirección: {self.direccion} | teléfono: {self.telefono} | email: {self.mail} | Activo: {self.activo}"
 
 #Opciones de Posición
 opciones_posicion = [
@@ -53,7 +53,7 @@ class Jugador(Persona):
     pais = models.CharField(verbose_name="País")
    
     def __str__(self):
-        return f"nombre: {self.nombre_completo()} | DNI: {self.dni} | F.Nac.: {self.fecha_nacimiento} | Pase: {self.estado} | Posición: {self.posicion} | email: {self.mail}" 
+        return f"nombre: {self.nombre_completo()} | DNI: {self.dni} | F.Nac.: {self.fecha_nacimiento} | Pase: {self.estado} | Posición: {self.posicion} | email: {self.mail} | Activo: {self.activo}" 
    
     #Lo sacamos para Probar sin Fecha de Nacimiento
     
@@ -65,7 +65,7 @@ class Representante(Persona):
     cuit = models.BigIntegerField(verbose_name="CUIT", unique=True, null=False, blank=False)
 
     def __str__(self):
-        return f"{self.nombre_completo()} | DNI: {self.dni} | CUIT: {self.cuit}"
+        return f"{self.nombre_completo()} | DNI: {self.dni} | CUIT: {self.cuit} | Activo: {self.activo}"
 
 
 #opciones tipo de contrato
@@ -89,17 +89,19 @@ class TipoContratos(models.Model):
     fecha_fin = models.DateField(verbose_name="Fecha de finalización")
     clausula = models.CharField(max_length=1000, verbose_name="Clausula")
     monto = models.IntegerField(verbose_name="Monto")
+    activo = activo = models.BooleanField("Activo", default=True, null=True)
     representante = models.ForeignKey(Representante, on_delete=models.CASCADE, null=True, blank=True) #un repre muchos contratos
     jugadores = models.ManyToManyField(Jugador, through='Contrato')
 
     def __str__(self):
-        return f"Contrato Tipo: {self.tipo_contrato} | Clausula: {self.clausula} | Posición Contratada: {self.posicion_contratado} | Descripción: {self.descripcion} | Representante: {self.representantes}"
+        return f"Contrato Tipo: {self.tipo_contrato} | Clausula: {self.clausula} | Posición Contratada: {self.posicion_contratado} | Descripción: {self.descripcion} | Representante: {self.representante} | Jugador: {self.jugadores} | Activo: {self.activo}"
 
 #Tabla intermedia
 class Contrato(models.Model):
     jugador = models.ForeignKey(Jugador, on_delete=models.CASCADE)
     TipoContratos = models.ForeignKey(TipoContratos, on_delete=models.CASCADE)
     fecha_contratacion = models.DateField(verbose_name="Fecha de contratación", auto_now_add=True)
+    activo = activo = models.BooleanField("Activo", default=True, null=True)
         
    # class Meta:
     #    db_table = 'Contrato'
@@ -129,7 +131,8 @@ class Contacto(models.Model):
  #   nombre = models.CharField(max_length=100, verbose_name="Nombre")
   #  apellido = models.CharField(max_length=100, verbose_name="Apellido")
    # dni = models.IntegerField(verbose_name="DNI", unique=True)
-    #cuit = models.IntegerField(verbose_name="CUIT", unique=True)  # Changed field name to lowercase
+    #cuit = models.IntegerField(verbose_name="CUIT", unique=True)  # Changed field name to2
+    #  lowercase
 
 #class TipoContratos(models.Model):
  #   nombre = models.CharField(max_length=100, verbose_name="Nombre")

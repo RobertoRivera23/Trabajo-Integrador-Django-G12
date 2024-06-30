@@ -127,7 +127,8 @@ def alta_jugador(request):
                 pais = form.cleaned_data['pais'], 
                 direccion = form.cleaned_data['direccion'], 
                 telefono = form.cleaned_data['telefono'], 
-                mail = form.cleaned_data['mail'] 
+                mail = form.cleaned_data['mail'], 
+                activo = form.cleanned_data['activo'] 
             )
 
             nuevo_jugador.save()
@@ -157,7 +158,8 @@ def alta_representante(request):
                 nombre = form.cleaned_data['nombre'], 
                 apellido = form.cleaned_data['apellido'], 
                 dni = form.cleaned_data['dni'], 
-                cuit = form.cleaned_data['cuit']
+                cuit = form.cleaned_data['cuit'],
+                activo = form.cleanned_data['activo'] 
             )
 
             nuevo_representante.save()
@@ -202,6 +204,7 @@ def alta_contrato(request):
                 fecha_fin = form.cleaned_data['fecha de fin'],
                 clausula = form.cleaned_data['clausula'],
                 monto = form.cleaned_data['monto'],
+                activo = form.cleanned_data['activo'],
                 representante = form.cleaned_data['representante'],
                 jugadores = form.cleaned_data['jugador']
             )
