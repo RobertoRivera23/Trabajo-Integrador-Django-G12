@@ -127,3 +127,31 @@ def alta_contrato(request):
             messages.success(request, 'El Contrato fue realizado con éxito')
             return redirect('index')
     return render(request, 'web/alta_contrato.html', context)
+
+#Edicion de jugadores
+def editar_jugadores(request, id_jugador):
+    context = {}
+    jugador = Jugador.objets.filter(id=id_jugador).first() #filtra objeto jugador por id y guarda el que coincida con el que pasamos por parametro
+    
+    if request.method == "GET":
+        context['alta_jugador_form'] = forms.AltaJugadorForm(isinstance=jugador)
+    else:
+        form = forms.AltaJugadorForm(request.POST)
+        context['alta_jugador_form'] = form 
+        if form.is_valid():
+            nuevo_jugador = Jugador(
+                nombre = form.cleaned_data['nombre'], 
+                apellido = form.cleaned_data['apellido'], 
+                dni = form.cleaned_data['dni'], 
+                fecha_nacimiento = form.cleaned_data['fecha_nacimiento'], 
+                categoria = form.cleaned_data['categoria'], 
+                posicion = form.cleaned_data['posicion'], 
+                pais = form.cleaned_data['pais'], 
+                direccion = form.cleaned_data['direccion'], 
+                telefono = form.cleaned_data['telefono'], 
+                mail = form.cleaned_data['mail'] 
+            )
+            nuevo_jugador.save()
+            messages.success(request, 'El Jugador fue modificado de alta con éxito')
+            return redirect('index')
+    return render(request, "web/edit_jugador.html", context)

@@ -65,7 +65,7 @@ class Representante(Persona):
     cuit = models.BigIntegerField(verbose_name="CUIT", unique=True, null=False, blank=False)
 
     def __str__(self):
-        return f"{self.nombre_completo()} | DNI: {self.dni} | CUIT: {self.cuit} | Activo: {self.activo}"
+        return f"{self.nombre_completo()} | DNI: {self.dni} | CUIT: {self.cuit} | Telefono: {self.telefono} | email: {self.mail} Activo: {self.activo}"
 
 
 #opciones tipo de contrato

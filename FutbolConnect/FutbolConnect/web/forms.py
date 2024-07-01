@@ -39,7 +39,7 @@ class AltaRepresentanteForm(forms.Form):
     direccion = forms.CharField(label="Dirección", required=True)
     cuit = forms.IntegerField(label="CUIT", required=True)
     telefono = forms.CharField(label="Teléfono", required=True)
-    correo = forms.EmailField(label="Email", required=True)
+    mail = forms.EmailField(label="Email", required=True)
     activo = forms.BooleanField(label="Estado", required=False)
 
 class AltaContratoForm(forms.Form):
@@ -52,7 +52,7 @@ class AltaContratoForm(forms.Form):
     clausula = forms.CharField(label="Clausula", required=True)
     monto = forms.IntegerField(label="Monto")
     activo = forms.BooleanField(label="Estado", required=False)
-    representante = forms.IntegerField(label="Representante") #un repre muchos contratos
+    representante = forms.IntegerField(label="Representante", required=False) #un repre muchos contratos
     jugadores = forms.IntegerField(label="Jugador")
 
     def clean_nombre(self):

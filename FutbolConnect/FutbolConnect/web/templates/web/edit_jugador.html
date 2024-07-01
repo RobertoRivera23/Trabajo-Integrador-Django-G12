@@ -1,0 +1,25 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block title %} FC-Editar Jugadores {% endblock %}
+{% block extra_css %} <link rel="stylesheet" href="{% static 'web/styles/edit_jugador.css' %}"> {% endblock %}
+
+{% block main %}  
+    <h2>Editar datos de Jugador:</h2>
+    
+    {% if user.is_authenticated %}
+        <h2>Bienvenid@ {{ user.username }}</h2>
+    {% endif %}
+    <p>{{fecha_hora}}</p>
+    <a href="{% url 'index' %}"> Volver </a>
+
+    <form method="POST" action="{% url 'edit_jugador' %}">
+        {% csrf_token %}
+        {{ alta_jugador_form }}
+        
+       <input type="submit" 
+        class="btn btn-primary"> 
+       
+    </form>
+
+{% endblock %}

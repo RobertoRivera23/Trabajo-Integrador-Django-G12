@@ -20,5 +20,7 @@ urlpatterns = [
     path('listado_contratos/', views.listado_contratos, name='listado_contratos'),
     path('alta_contrato/', views.alta_contrato, name='alta_contrato'),
     path('alta_representante/', views.alta_representante, name='alta_representante'),
+    path('edit_jugador/<int:id_jugador>', views.editar_jugadores, name='edit_jugador'),
+    
   
 ]

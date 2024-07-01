@@ -9,33 +9,48 @@
 {% if user.is_authenticated %}
 <h2>Usuario: {{ user.username }}</h2>
 {% endif %}
-    <h1>Listado de Representantes</h1>
-    <p>{{fecha_hora}}</p>
 
+<h1>Listado de Representantes</h1>
+<p>{{fecha_hora}}</p>
+
+<a href="{% url 'index' %}">volver</a>
+   
+<table class=tabla>
+    <thead>
+        <tr>            <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">DNI</th>
+            <th scope="col">CUIT</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Activo</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
+        
+        </tr>
+    </thead>
+        
     <body>
-    
+    {% for representantes in representantes %}
+        <tr>
+            <td scope="row">{{ representantes.id }} </td>
+            <td>{{ representantes.nombre }}</td>
+            <td>{{ representantes.apellido }}</td>
+            <td>{{ representantes.dni }}</td>
+            <td>{{ representantes.cuit }}</td>
+            <td>{{ representantes.direccion }}</td>
+            <td>{{ representantes.telefono }}</td>
+            <td>{{ representantes.mail }}</td>
+            <td>{{ representantes.activo }}</td>
+            <td><a class="btn btn_warning" href="{ url '' }">Editar</a></td>
+            <td><a class="btn btn_danger" href="#">Eliminar</a></td>
+        </tr>
+    {% endfor %}    
+</body> 
+</table>
 
-        {% if cuota_al_dia %}
-        <p style="padding: 15px; background-color: green; color: white;">EL REPRESENTANTE CUMPLE LOS REQUISITOS PARA SER DADO DE ALTA</p> 
-        {% else %}
-        <p style="padding: 15px; background-color: rgb(236, 30, 7); color: white;">REPRESENTANTE NO PUEDE SER DADO DE ALTA</p> 
-        {% endif %}
-    
-        <a href="{% url 'index' %}">volver</a>
-        <section>
-            {% for representantes in representantes %}
-            <article>
-                <p>{{ representantes | upper}}</p>
-            </article>
-    
-            {% empty %}
-               <article>
-                    <p>No hay Representantes cargados</p>
-               </article>
-    
-            {% endfor %}
-    
-        </section>
-    </body>
 
 {% endblock %}
