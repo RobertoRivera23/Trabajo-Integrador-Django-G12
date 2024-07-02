@@ -19,9 +19,11 @@ from django.urls import path, include
 from web import views
 
 
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('web/', include('web.urls')),
-    path('edit_jugador/<int:pk>/', views.edit_jugador, name='edit_jugador'),
-    # Other paths for your views
+    path('edit_jugador/<int:jugador_id>/', views.edit_jugador, name='edit_jugador'),
+    # other paths
 ]
