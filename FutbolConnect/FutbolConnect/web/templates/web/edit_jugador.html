@@ -10,16 +10,13 @@
     {% if user.is_authenticated %}
         <h2>Bienvenid@ {{ user.username }}</h2>
     {% endif %}
-    <p>{{fecha_hora}}</p>
+    <p>{{ fecha_hora }}</p>
     <a href="{% url 'index' %}"> Volver </a>
-
-    <form method="POST" action="{% url 'edit_jugador' %}">
+    
+    <form method="POST" action="{% url 'edit_jugador' jugador.id %}">
         {% csrf_token %}
-        {{ alta_jugador_form }}
+        {{ edit_jugador_form }}
         
-       <input type="submit" 
-        class="btn btn-primary"> 
-       
+       <input type="submit" class="btn btn-primary"> 
     </form>
-
 {% endblock %}
