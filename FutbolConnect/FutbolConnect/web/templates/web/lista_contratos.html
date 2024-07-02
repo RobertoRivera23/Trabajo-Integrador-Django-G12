@@ -12,9 +12,9 @@
     <h1>Listado de Contratos</h1>
     <p>{{fecha_hora}}</p>
 
-    <body>
+<body>
     
-        <a href="{% url 'index' %}">volver</a>
+    <a href="{% url 'index' %}">volver</a>
     
         <section>
             {% for contratos in contratos %}
@@ -27,9 +27,7 @@
                     <p>No hay contratos cargados</p>
                </article>
     
-            {% endfor %}
-    
-        </section>
+    {% endfor %}  
     </body>
-
+</table>
 {% endblock %}
