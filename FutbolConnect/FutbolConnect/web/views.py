@@ -1,4 +1,5 @@
-from django.shortcuts import redirect, render, redirect, get_list_or_404
+from django.shortcuts import redirect, render, get_list_or_404
+
 from django.contrib import messages
 from . import forms
 from .forms import AltaJugadorForm
@@ -148,15 +149,21 @@ def lista_contratos_firmados(request):
 
 
 #Edicion de jugadores
-def edit_jugador(request, id):
-    context = {}
-    jugador= Jugador.objects.filter(id=id).first()
+
+def edit_jugador(request, pk):
+    jugador = get_object_or_404(Jugador, pk=pk)
+    # Other logic for editing the jugador object
+    return render(request, 'edit_jugador.html', {'jugador': jugador})
+
+#def edit_jugador(request, id):
+ #   context = {}
+  #  jugador= Jugador.objects.filter(id=id).first()
 #    jugador = get_list_or_404(Jugador, id=id) #filtra objeto jugador por id y guarda el que coincida con el que pasamos por parametro
    
-    context = {'alta_jugador_form': forms.AltaContratoForm(instance=jugador)}
+    #context = {'alta_jugador_form': forms.AltaContratoForm(instance=jugador)}
    
     
-    return render(request, 'edit_jugador', context, jugador)
+    #return render(request, 'edit_jugador', context, jugador)
    
    
 
