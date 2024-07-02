@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}FutbolConnect{% endblock %}</title>
+    <link  rel="stylesheet" href="{% static 'web/lib/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'web/styles/base.css' %}">
     {% block extra_css %}{% endblock %}
     <style>
@@ -116,7 +117,6 @@
     <main>
         <h1 class="centered">Bienvenidos a FutbolConnect</h1>
         <h2 class="centered">Aplicación de contacto entre Representantes y Jugadores</h2>
-
         {% block main %}{% endblock %}
     </main>
 
@@ -128,6 +128,7 @@
             <a href="https://www.whatsapp.com"><img src="{% static 'web/images/whatsapp.png' %}" alt="WhatsApp"></a>
         </div>
     </footer>
+    <script src="web/lib/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

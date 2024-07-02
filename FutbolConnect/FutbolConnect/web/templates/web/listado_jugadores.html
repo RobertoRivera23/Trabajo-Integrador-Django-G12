@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %} FC-Listado de Jugadores {% endblock %}
-{% block extra_css %} <link rel="stylesheet" href="{% static 'web/styles/listado_jugadores.css' %}">{% endblock %}
+{% block extra_css %} <link rel="stylesheet" href="{% static 'web/styles/listado_jugadores.css' %}"> {% endblock %}
 
 {% block main %}  
     
@@ -46,8 +46,8 @@
             <td>{{ jugadores.telefono }}</td>
             <td>{{ jugadores.mail }}</td>
             <td>{{ jugadores.activo }}</td>
-            <td><a class="btn btn_warning" href="{% url 'edit_jugador' jugadores.id %}">Editar</a></td>
-            <td><a class="btn btn_danger" href="#">Eliminar</a></td>
+            <td><a class="btn btn-dark" href="{% url 'edit_jugador' jugadores.id %}">Editar</a></td>
+            <td><a class="btn btn-danger" href="#">Eliminar</a></td>
         </tr>
     {% endfor %}    
     </body> 

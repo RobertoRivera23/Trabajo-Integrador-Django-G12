@@ -3,7 +3,7 @@ from django.contrib import messages
 from . import forms
 from .forms import AltaJugadorForm
 
-from .models import Jugador, Representante, Contacto, TipoContratos,Contrato
+from .models import Jugador, Representante, Contacto, TipoContratos, Contrato
 
 # Vistas relacionadas con el menú y otras páginas
 
