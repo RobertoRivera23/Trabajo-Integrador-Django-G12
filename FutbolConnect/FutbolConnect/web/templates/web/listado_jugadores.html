@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %} FC-Listado de Jugadores {% endblock %}
-{% block extra_css %} <link rel="stylesheet" href="{% static 'web/styles/listado_jugadores.css' %}"> {% endblock %}
+{% block extra_css %} <link rel="stylesheet" href="{% static 'web/styles/listado_jugadores.css' %}">{% endblock %}
 
 {% block main %}  
     
@@ -11,9 +11,8 @@
 {% endif %}
     <h1>Listado de Jugadores</h1>
     <p>{{fecha_hora}}</p>
-
-<table class="table">
-    <thead class="thead-ligth">
+<table class=tabla>
+    <thead>
         <tr>
             <th scope="col">ID</th>
             <th scope="col">Nombre</th>
@@ -47,7 +46,7 @@
             <td>{{ jugadores.telefono }}</td>
             <td>{{ jugadores.mail }}</td>
             <td>{{ jugadores.activo }}</td>
-            <td><a class="btn btn-dark" href="{% url 'edit_jugador' jugadores.id %}">Editar</a></td>
+            <td><a class="btn btn-info" href="{% url 'edit_jugador' jugadores.id %}">Editar</a></td>
             <td><a class="btn btn-danger" href="#">Eliminar</a></td>
         </tr>
     {% endfor %}    
