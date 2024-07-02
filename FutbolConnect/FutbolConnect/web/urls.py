@@ -20,7 +20,9 @@ urlpatterns = [
     path('listado_contratos/', views.listado_contratos, name='listado_contratos'),
     path('alta_contrato/', views.alta_contrato, name='alta_contrato'),
     path('alta_representante/', views.alta_representante, name='alta_representante'),
-    path('edit_jugador/<int:id_jugador>', views.editar_jugadores, name='edit_jugador'),
+    path('edit_jugador/<int:id>/', views.edit_jugador, name='edit_jugador'),
+    path('firma_contrato/', views.firma_contrato, name='firma_contrato'),
+    path('lista_contratos_firmados/', views.lista_contratos_firmados, name='lista_contratos_firmados'),
     
   
 ]

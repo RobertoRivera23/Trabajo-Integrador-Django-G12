@@ -8,7 +8,7 @@
     <h2>Alta de Nuevo Jugador:</h2>
     
     {% if user.is_authenticated %}
-        <h2>Bienvenid@ {{ user.username }}</h2>
+        <h3>Bienvenid@ {{ user.username }}</h3>
     {% endif %}
     <p>{{fecha_hora}}</p>
     <a href="{% url 'index' %}"> Volver </a>
@@ -17,8 +17,8 @@
         {% csrf_token %}
         {{ alta_jugador_form }}
         
-       <input type="submit" 
-        class="btn btn-primary"> 
+       <button type="submit" 
+        class="btn btn-primary"> Guardar </button>
        
     </form>
 

@@ -19,8 +19,14 @@ class ContactoForm(forms.Form):
     mail = forms.EmailField(label="Email", required=True)
     fecha_hora = forms.DateField(label="Fecha de consulta", required=True)
 
-class AltaJugadorForm(forms.Form):
-    nombre = forms.CharField(label="Nombre", required=True, widget=forms.TextInput(attrs={'class': 'campo_azul'}))
+class AltaJugadorForm(forms.ModelForm):
+    class Meta:
+        model = Jugador
+        fields = '__all__'
+        widgets = {'fecha_nacimiento': forms.DateInput(attrs={'type':'date'})}
+
+
+    """nombre = forms.CharField(label="Nombre", required=True, widget=forms.TextInput(attrs={'class': 'campo_azul'}))
     apellido = forms.CharField(label="Apellido", required=True)
     dni = forms.IntegerField(label="dni", required=True) 
     fecha_nacimiento = forms.DateField(label="Fecha_nacimiento", required=True) #Lo sacamos para Probar sin Fecha de Nacimiento
@@ -30,7 +36,7 @@ class AltaJugadorForm(forms.Form):
     direccion = forms.CharField(label="Dirección", required=True)
     telefono = forms.CharField(label="Teléfono", required=True)
     mail = forms.EmailField(label="Email", required=True)
-    activo = forms.BooleanField(label="Estado", required=False)
+    activo = forms.BooleanField(label="Estado", required=False)"""
     
 class AltaRepresentanteForm(forms.Form):
     nombre = forms.CharField(label="Nombre", required=True,widget=forms.TextInput(attrs={'class': 'campo_azul'}))
@@ -42,18 +48,21 @@ class AltaRepresentanteForm(forms.Form):
     mail = forms.EmailField(label="Email", required=True)
     activo = forms.BooleanField(label="Estado", required=False)
 
-class AltaContratoForm(forms.Form):
-    nombre = forms.CharField(label="Nombre", required=True)
-    tipo_contrato = forms.ChoiceField(label="Amateur o Profesional", choices=opciones_tipo_contrato)
-    descripcion = forms.CharField(required=True, label="Descripción")
-    posicion_contratado = forms.ChoiceField(label="Posición Contratada", choices=opciones_posicion)
-    fecha_inicio = forms.DateField(label="Fecha de inicio")
-    fecha_fin = forms.DateField(label="Fecha de finalización")
-    clausula = forms.CharField(label="Clausula", required=True)
-    monto = forms.IntegerField(label="Monto")
-    activo = forms.BooleanField(label="Estado", required=False)
-    representante = forms.IntegerField(label="Representante", required=False) #un repre muchos contratos
-    jugadores = forms.IntegerField(label="Jugador")
+class AltaContratoForm(forms.ModelForm):
+    class Meta:
+        model = TipoContratos
+        fields = '__all__'
+        widgets = {'fecha_inicio': forms.DateInput(attrs={'type':'date'}), 
+                   'fecha_fin': forms.DateInput(attrs={'type':'date'})}
+
+
+class FirmaContratoForm(forms.ModelForm):
+    class Meta:
+        model = Contrato
+        fields = '__all__'
+        widgets = {'fecha_contratacion': forms.DateInput(attrs={'type':'date'})}
+
+
 
     def clean_nombre(self):
         if not self.cleaned_data["nombre"].isalpha():
@@ -67,16 +76,23 @@ class AltaContratoForm(forms.Form):
 
         return self.cleaned_data["apellido"]
 
-    def clean(self):
-        cleaned_data = super().clean()
-        nombre = cleaned_data.get("nombre")
-        apellido = cleaned_data.get("apellido")
-        
-        if nombre == "Daniel" and apellido == "Flores":
-            raise ValidationError("El usuario Daniel Flores ya existe")
-        
+    def clean_dni(self):
         if self.cleaned_data["dni"] < 1000000:
             raise ValidationError("El dni debe tener 8 digitos")
 
-        return self.cleaned_data
-        
+        return self.cleaned_data["dni"]
+
+
+"""class AltaContratoForm(forms.Form):
+    nombre = forms.CharField(label="Nombre", required=True)
+    tipo_contrato = forms.ChoiceField(label="Amateur o Profesional", choices=opciones_tipo_contrato)
+    descripcion = forms.CharField(required=True, label="Descripción")
+    posicion_contratado = forms.ChoiceField(label="Posición Contratada", choices=opciones_posicion)
+    fecha_inicio = forms.DateField(label="Fecha de inicio")
+    fecha_fin = forms.DateField(label="Fecha de finalización")
+    clausula = forms.CharField(label="Clausula", required=True)
+    monto = forms.IntegerField(label="Monto")
+    activo = forms.BooleanField(label="Estado", required=False)
+    representante = forms.IntegerField(label="Representante", required=False) #un repre muchos contratos
+    jugadores = forms.IntegerField(label="Jugador")
+    """

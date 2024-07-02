@@ -13,7 +13,7 @@ opciones = [
 class Persona(models.Model):
     nombre = models.CharField(max_length=100, verbose_name="Nombre", null=False)
     apellido = models.CharField(max_length=100, verbose_name="Apellido")
-    dni = models.IntegerField(verbose_name="DNI", unique=True)
+    dni = models.IntegerField(verbose_name="DNI", unique=False)
     direccion = models.CharField(verbose_name="Dirección", null=False)
     telefono = models.CharField(verbose_name="Teléfono", null=False)    
     mail = models.EmailField(verbose_name="Email", null=False, blank=True)
@@ -47,7 +47,7 @@ class Jugador(Persona):
         choices=opciones)
     fecha_nacimiento = models.DateField(verbose_name="Fecha_nacimiento", null=True)
     categoria = models.CharField(verbose_name="Categoría")
-    posicion = models.IntegerField(verbose_name="Posición Contratada: ", 
+    posicion = models.IntegerField(verbose_name="Posición ", 
                                    null=True, blank=True, 
                                    choices=opciones_posicion)
     pais = models.CharField(verbose_name="País")
@@ -70,19 +70,18 @@ class Representante(Persona):
 
 #opciones tipo de contrato
 opciones_tipo_contrato = [
-    (1, " "),
-    (2, "Amateur"), 
-    (3, "Profesional")
+    (1, "Amateur"), 
+    (2, "Profesional"),
 ]
 
 #
 class TipoContratos(models.Model):
     nombre = models.CharField(max_length=100, verbose_name="Nombre")
-    tipo_contrato = models.IntegerField(verbose_name="Amateur o Profesional", 
+    tipo_contrato = models.IntegerField(verbose_name="Tipo de contrato", 
                                         null=False, blank=False,
                                         choices=opciones_tipo_contrato)
     descripcion = models.CharField(max_length=200, verbose_name="Descripción")
-    posicion_contratado = models.IntegerField(verbose_name="Posición Contratada ", 
+    posicion_contratado = models.IntegerField(verbose_name="Posición Contratada", 
                                               null=False, blank=False, 
                                               choices=opciones_posicion)
     fecha_inicio = models.DateField(verbose_name="Fecha de inicio")
@@ -103,6 +102,10 @@ class Contrato(models.Model):
     fecha_contratacion = models.DateField(verbose_name="Fecha de contratación", auto_now_add=True)
     activo = activo = models.BooleanField("Activo", default=True, null=True)
         
+    def __str__(self):
+        return f"Representante: {self.TipoContratos.representante.nombre_completo} | Jugador: {self.jugador.nombre_completo} | Tipo de Contrato: {self.TipoContratos.tipo_contrato} | Activo: {self.activo}"
+
+
    # class Meta:
     #    db_table = 'Contrato'
 

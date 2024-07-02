@@ -83,10 +83,13 @@
                     {% endif %}
                     {% if perms.web.add_representante %}
                         <li><a href="{% url 'alta_representante' %}">Alta de representante</a></li>
+                        <li><a href="{% url 'alta_contrato' %}">Alta de Contrato</a></li>                       
                     {% endif %}
                     <li><a href="{% url 'listado_representantes' %}">Listado de Representantes</a></li>
-                    <li><a href="{% url 'alta_contrato' %}">Alta Contratos</a></li>
-                    <li><a href="{% url 'listado_contratos' %}">Listado de Contratos</a></li>
+                    <li><a href="{% url 'listado_contratos' %}">Lista de Contratos</a></li>
+                    <li><a href="{% url 'firma_contrato' %}">Firma de Contratos</a></li>
+                    <li><a href="{% url 'lista_contratos_firmados' %}">Lista de Contratos Firmados</a></li>
+                    
                 {% endif %}
                 <li><a href="{% url 'contacto' %}">Contacto</a></li>
             </ul>

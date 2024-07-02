@@ -7,7 +7,7 @@
 {% block main %}  
     
 {% if user.is_authenticated %}
-    <h2>Usuario: {{ user.username }}</h2>
+    <h3>Usuario: {{ user.username }}</h3>
 {% endif %}
     <h1>Listado de Jugadores</h1>
     <p>{{fecha_hora}}</p>
@@ -28,7 +28,6 @@
             <th scope="col">Activo</th>
                 <th scope="col">Editar</th>
                 <th scope="col">Eliminar</th>
-
         </tr>
     </thead>
 
@@ -51,28 +50,6 @@
             <td><a class="btn btn_danger" href="#">Eliminar</a></td>
         </tr>
     {% endfor %}    
-        <!--{% if cuota_al_dia %}
-        <p style="padding: 15px; background-color: green; color: white;">EL JUGADOR CUMPLE LOS REQUISITOS PARA SER DADO DE ALTA</p> 
-        {% else %}
-        <p style="padding: 15px; background-color: rgb(236, 30, 7); color: white;">JUGADOR NO PUEDE SER DADO DE ALTA</p> 
-        {% endif %}
-    
-        <a href="{% url 'index' %}">volver</a>
-    
-        <section>
-            {% for jugadores in jugadores %}
-            <article>
-                <p>{{ jugadores | upper}}</p>
-            </article>
-    
-            {% empty %}
-               <article>
-                    <p>No hay jugadores cargados</p>
-               </article>
-    
-            {% endfor %}
-    
-        </section> -->
     </body> 
 </table>
 
