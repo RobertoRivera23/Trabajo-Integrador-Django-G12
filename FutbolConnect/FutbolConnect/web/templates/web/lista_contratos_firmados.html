@@ -14,8 +14,8 @@
    
         <a href="{% url 'index' %}">volver</a>
 
-<table class=tabla>
-    <thead>
+<table class="table">
+    <thead class="thead-ligth">
         <tr>
             <th scope="col">Representante</th>
             <th scope="col">Jugador</th>
@@ -50,7 +50,7 @@
             <td>{{ jugadores.telefono }}</td>
             <td>{{ jugadores.mail }}</td>
             <td>{{ jugadores.activo }}</td> -->
-                    <td><a class="btn btn-warning" href="#">Editar</a></td>
+                    <td><a class="btn btn-info" href="#">Editar</a></td>
                     <td><a class="btn btn-danger" href="#">Eliminar</a></td>
                 </tr>
             {% endfor %}    
