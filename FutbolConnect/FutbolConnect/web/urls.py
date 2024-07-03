@@ -6,10 +6,10 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('accounts/', include('django.contrib.auth.urls')),
-    path("accounts/login/", auth_views.LoginView.as_view(template_name="web/registration/login.html"), name="login"),
-    path("accounts/logout/", views.user_logout, name="logout"),
-    path("accounts/password_reset/", auth_views.PasswordResetView.as_view(template_name="web/registration/password_reset.html"), name="password_reset"),
+    path('accounts/', include('django.contrib.auth.urls')), 
+    path('accounts/login/', auth_views.LoginView.as_view(template_name="web/registration/login.html"), name='login'),
+    path('accounts/logout/', views.user_logout, name='logout'),
+    path('accounts/password_reset/', auth_views.PasswordResetView.as_view(template_name="web/registration/password_reset.html"), name="password_reset"),
 
 
     #path('saludar/<str:nombre>/', views.saludar, name='saludar'),

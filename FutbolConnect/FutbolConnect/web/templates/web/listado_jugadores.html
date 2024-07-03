@@ -3,14 +3,12 @@
 
 {% block title %} FC-Listado de Jugadores {% endblock %}
 {% block extra_css %} <link rel="stylesheet" href="{% static 'web/styles/listado_jugadores.css' %}">{% endblock %}
-
 {% block main %}  
-    
-{% if user.is_authenticated %}
-    <h3>Usuario: {{ user.username }}</h3>
-{% endif %}
+
     <h1>Listado de Jugadores</h1>
     <p>{{fecha_hora}}</p>
+    <a href="{% url 'index' %}"> Volver </a>
+    
 <table class=tabla>
     <thead>
         <tr>
