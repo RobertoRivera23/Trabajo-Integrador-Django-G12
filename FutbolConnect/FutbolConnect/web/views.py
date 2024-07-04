@@ -11,13 +11,13 @@ from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-    return render(request, 'web/index.html')
+    return render(request, 'web/index.html')       
 
 
 def user_logout(request):
     logout(request)
     messages.success(request, 'Sesión cerrada')
-    return redirect('web/index.html')
+    return redirect('index')
 
 def contacto(request):
     context = {}
@@ -37,6 +37,7 @@ def contacto(request):
             messages.success(request, 'Su petición de contacto fue realizada con éxito')
             return redirect('index')
     return render(request, 'web/contacto.html', context)
+
 @login_required
 def alta_jugador(request):
     context = {}
@@ -104,6 +105,7 @@ def alta_contrato(request):
             messages.success(request, 'El Contrato fue creado con éxito')
             return redirect('index')
     return render(request, 'web/alta_contrato.html', context)
+
 
 @login_required
 def firma_contrato(request):

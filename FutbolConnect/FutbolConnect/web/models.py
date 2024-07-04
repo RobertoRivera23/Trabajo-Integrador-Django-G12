@@ -1,7 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 import datetime
-from FutbolConnect import settings
 
 #Clase padre con atributos comunes para Jugadores y Representantes
 
@@ -19,12 +18,6 @@ class Persona(models.Model):
     telefono = models.CharField(verbose_name="Teléfono", null=False)    
     mail = models.EmailField(verbose_name="Email", null=False, blank=True)
     activo = models.BooleanField("Activo", default=True, null=False)
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True
-    )
     class Meta:
         abstract = True
     # Metodo que retornara nombre y apellido
@@ -58,7 +51,6 @@ class Jugador(Persona):
                                    null=True, blank=True, 
                                    choices=opciones_posicion)
     pais = models.CharField(verbose_name="País")
-
    
     def __str__(self):
         return f"nombre: {self.nombre_completo()} | DNI: {self.dni} | F.Nac.: {self.fecha_nacimiento} | Pase: {self.estado} | Posición: {self.posicion} | email: {self.mail} | Activo: {self.activo}" 

@@ -25,18 +25,6 @@ class AltaJugadorForm(forms.ModelForm):
         fields = '__all__'
         widgets = {'fecha_nacimiento': forms.DateInput(attrs={'type':'date'})}
 
-
-    """nombre = forms.CharField(label="Nombre", required=True, widget=forms.TextInput(attrs={'class': 'campo_azul'}))
-    apellido = forms.CharField(label="Apellido", required=True)
-    dni = forms.IntegerField(label="dni", required=True) 
-    fecha_nacimiento = forms.DateField(label="Fecha_nacimiento", required=True) #Lo sacamos para Probar sin Fecha de Nacimiento
-    categoria = forms.CharField(label="Categoría", required=True)
-    posicion = forms.ChoiceField(label="Posición", required=True, choices=opciones_posicion)
-    pais = forms.CharField(label="País", required=True)
-    direccion = forms.CharField(label="Dirección", required=True)
-    telefono = forms.CharField(label="Teléfono", required=True)
-    mail = forms.EmailField(label="Email", required=True)
-    activo = forms.BooleanField(label="Estado", required=False)"""
     
 class AltaRepresentanteForm(forms.Form):
     nombre = forms.CharField(label="Nombre", required=True,widget=forms.TextInput(attrs={'class': 'campo_azul'}))

@@ -78,15 +78,15 @@
             <ul>
                 <li><a href="{% url 'index' %}">Home</a></li>
                 {% if user.is_authenticated %}
+                    <li><a href="{% url 'listado_jugadores' %}">Listado de Jugadores</a></li>
                     {% if perms.web.add_jugador %}
                         <li><a href="{% url 'alta_jugador' %}">Alta de jugador</a></li>
                     {% endif %}
                     {% if perms.web.add_representante %}
-                        <li><a href="{% url 'listado_jugadores' %}">Listado de Jugadores</a></li>
                         <li><a href="{% url 'alta_representante' %}">Alta de representante</a></li>
+                        <li><a href="{% url 'alta_contrato' %}">Alta de Contrato</a></li>                       
                     {% endif %}
                     <li><a href="{% url 'listado_representantes' %}">Listado de Representantes</a></li>
-                    <li><a href="{% url 'alta_contrato' %}">Alta de Contratos</a></li>
                     <li><a href="{% url 'listado_contratos' %}">Lista de Contratos</a></li>
                     <li><a href="{% url 'firma_contrato' %}">Firma de Contratos</a></li>
                     <li><a href="{% url 'lista_contratos_firmados' %}">Lista de Contratos Firmados</a></li>
@@ -115,10 +115,6 @@
     </header>
 
     <main>
-       <!-- {% if user.is_authenticated %}
-        <h5>Usuario: {{ user.username }}</h5>
-        {% endif %} -->
-
         <h1 class="centered">Bienvenidos a FutbolConnect</h1>
         <h4 class="centered">Aplicación de contacto entre Representantes y Jugadores</h4>
         {% block main %}{% endblock %}
