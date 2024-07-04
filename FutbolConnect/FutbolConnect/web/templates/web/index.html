@@ -6,10 +6,11 @@
 {% block extra_css %}<link rel="stylesheet" href="{% static 'web/styles/index.css' %}"> {% endblock %}
 
 {% block main %} 
-    <img src="{% static 'web/images/fondo1.jpg' %}" alt="Foto del Fondo">
-    {% if user.is_authenticated %}
-        <h2>Bienvenid@ {{ user.username }}</h2>
+{% if user.is_authenticated %}
+       <h2>Bienvenid@ {{ user.username }}</h2> 
     {% endif %}
+    <img src="{% static 'web/images/fondo1.jpg' %}" alt="Foto del Fondo">
+    
 
     <p>{{ fecha_hora}}</p>
 {% endblock %}

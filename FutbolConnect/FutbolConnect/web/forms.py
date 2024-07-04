@@ -18,6 +18,7 @@ class ContactoForm(forms.Form):
     apellido = forms.CharField(label="Apellido", required=True)
     mail = forms.EmailField(label="Email", required=True)
     fecha_hora = forms.DateField(label="Fecha de consulta", required=True)
+    activo = forms.BooleanField(label="Estado", required=False)
 
 class AltaJugadorForm(forms.ModelForm):
     class Meta:

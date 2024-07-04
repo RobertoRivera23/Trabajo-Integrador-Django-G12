@@ -23,6 +23,7 @@ urlpatterns = [
     path('edit_jugador/<int:id>/', views.edit_jugador, name='edit_jugador'),
     path('firma_contrato/', views.firma_contrato, name='firma_contrato'),
     path('lista_contratos_firmados/', views.lista_contratos_firmados, name='lista_contratos_firmados'),
+    path('lista_contacto/', views.ContactoListView, name='lista_contacto'),
     
   
 ]

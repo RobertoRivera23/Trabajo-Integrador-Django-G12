@@ -8,6 +8,9 @@ from .forms import AltaJugadorForm, AltaRepresentanteForm, AltaContratoForm, Fir
 from datetime import datetime
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.views.generic.list import ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 def index(request):
@@ -50,7 +53,7 @@ def alta_jugador(request):
         if form.is_valid():
             nuevo_jugador = form.save()
             messages.success(request, 'El Jugador fue dado de alta con éxito')
-            return redirect('index')
+            return redirect('listado_jugadores')
     return render(request, 'web/alta_jugador.html', context)
 
 @login_required
@@ -129,6 +132,13 @@ def lista_contratos_firmados(request):
         'contratos': contratos,
     }
     return render(request, 'web/lista_contratos_firmados.html', context)
+
+def ContactoListView(LoginRequirenMixin, ListView):
+    model=Contacto
+    context_object_name='contactos'
+    template_name='web/lista_contacto.html'
+    queryset= Contacto.objects.filter()
+
 
 #MODIFICA
 

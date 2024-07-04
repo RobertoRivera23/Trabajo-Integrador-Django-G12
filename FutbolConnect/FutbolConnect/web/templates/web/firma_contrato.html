@@ -15,11 +15,12 @@
 
     <form method="POST" action="{% url 'firma_contrato' %}">
         {% csrf_token %}
+     <div class="container">
         {{ firma_contrato_form }}
         
-       <input type="submit" 
-        class="login"> 
-       
+        <button type="submit" 
+        class="btn btn-primary"> Guardar </button>
+     </div>  
     </form>
 
 {% endblock %}

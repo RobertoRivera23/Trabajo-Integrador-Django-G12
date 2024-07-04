@@ -66,7 +66,7 @@ class Representante(Persona):
 #opciones tipo de contrato
 opciones_tipo_contrato = [
     (1, "Amateur"), 
-    (2, "Profesional"),
+    (2, "Profesional")
 ]
 
 #
@@ -88,24 +88,25 @@ class TipoContratos(models.Model):
     jugadores = models.ManyToManyField(Jugador, through='Contrato')
 
     def __str__(self):
-        return f"Contrato Tipo: {self.tipo_contrato} | Clausula: {self.clausula} | Posición Contratada: {self.posicion_contratado} | Descripción: {self.descripcion} | Representante: {self.representante} | Jugador: {self.jugadores} | Activo: {self.activo}"
+        return f"Contrato Tipo: {self.tipo_contrato} | Clausula: {self.clausula} | Posición Contratada: {self.posicion_contratado} | Descripción: {self.descripcion} |Representante: {self.representante} | Activo: {self.activo}"
 
 #Tabla intermedia
 class Contrato(models.Model):
     jugador = models.ForeignKey(Jugador, on_delete=models.CASCADE)
     TipoContratos = models.ForeignKey(TipoContratos, on_delete=models.CASCADE)
     fecha_contratacion = models.DateField(verbose_name="Fecha de contratación", auto_now_add=True)
-    activo = activo = models.BooleanField("Activo", default=True, null=True)
+    activo = models.BooleanField(verbose_name="Activo", default=True, null=True)
         
     def __str__(self):
-        return f"Representante: {self.TipoContratos.representante.nombre_completo} | Jugador: {self.jugador.nombre_completo} | Tipo de Contrato: {self.TipoContratos.tipo_contrato} | Activo: {self.activo}"
-
-
+        return f"Representante: {self.TipoContratos.representante} | Jugador: {self.jugador} | Tipo de Contrato: {self.TipoContratos.tipo_contrato} | Activo: {self.activo}"
+                                 
+                                 
 class Contacto(models.Model):
     nombre = models.CharField(max_length=100, verbose_name="Nombre")
     apellido = models.CharField(max_length=100, verbose_name="Apellido")
     mail = models.EmailField(verbose_name="Email", null=False, blank=True)
     fecha_hora = models.DateField(verbose_name="Fecha de contacto", auto_now_add=True)
-    
+    activo= models.BooleanField(verbose_name="Activo", default=True, null=True)
+
     def __str__(self):
-        return f"Nombre: {self.nombre} | Apellido: {self.apellido} | Email: {self.mail} | Fecha y Hora: {self.fecha_hora}"
+        return f"Nombre: {self.nombre} | Apellido: {self.apellido} | Email: {self.mail} | Fecha y Hora: {self.fecha_hora} | Activo: {self.activo}"

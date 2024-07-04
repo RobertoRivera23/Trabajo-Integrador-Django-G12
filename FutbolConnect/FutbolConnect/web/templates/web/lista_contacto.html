@@ -1,0 +1,62 @@
+{% extends "web/base.html" %}
+{% load static %}
+
+{% block title %} FC-Listado de Contratos {% endblock %}
+{% block extra_css %} <link rel="stylesheet" href="{% static 'web/styles/listado_contratos.css' %}">{% endblock %}
+
+{% block main %}  
+    
+{% if user.is_authenticated %}
+    <h3>Usuario: {{ user.username }}</h3>
+{% endif %}
+    <h1>Listado de Contratos</h1>
+    <p>{{fecha_hora}}</p>
+
+<body>
+    
+    <a href="{% url 'index' %}">volver</a>
+    {% for contactos in contactos %}
+    {{contactos}}
+    {% endfor %}
+    <!--
+    <table class="table">
+        <thead class="thead-ligth">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Tipo de Contrato</th>
+                <th scope="col">Clausula</th>
+                <th scope="col">Posición Contratada</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Representante</th>
+                <th scope="col">DNI</th>
+                <th scope="col">CUIT</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Email</th>
+                <th scope="col">Activo</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
+            </tr>
+        </thead>
+       
+        <body>
+        {% for contratos in contratos %}
+            <tr>
+                <td scope="row">{{ contratos.id }} </td>
+                <td>{{ contratos.tipo_contrato }}</td>
+                <td>{{ contratos.clausula }}</td>
+                <td>{{ contratos.posicion_contratado }}</td>
+                <td>{{ contratos.descripcion }}</td>
+                <td>{{ contratos.representante.nombre_completo }}</td>
+                <td>{{ contratos.representante.dni }}</td>
+                <td>{{ contratos.representante.cuit }}</td>
+                <td>{{ contratos.representante.telefono }}</td>
+                <td>{{ contratos.representante.mail }}</td>
+                <td>{{ contratos.activo }}</td>
+                <td><a class="btn btn-info" href="#">Editar</a></td>
+                <td><a class="btn btn-danger" href="#">Eliminar</a></td>
+            </tr>
+        {% endfor %}  -->  
+        </body> 
+    </table>
+    
+{% endblock %}
