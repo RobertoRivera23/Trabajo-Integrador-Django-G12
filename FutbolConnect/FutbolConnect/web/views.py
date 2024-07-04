@@ -38,6 +38,7 @@ def contacto(request):
             return redirect('index')
     return render(request, 'web/contacto.html', context)
 
+
 @login_required
 def alta_jugador(request):
     context = {}
@@ -67,6 +68,20 @@ def alta_representante(request):
     return render(request, 'web/alta_representante.html', context)
 
 @login_required
+def alta_contrato(request):
+    context = {}
+    if request.method == "GET": 
+        context['alta_contrato_form'] = AltaContratoForm()
+    else:
+        form = AltaContratoForm(request.POST)
+        context['alta_contrato_form'] = form
+        if form.is_valid():
+            nuevo_contrato = form.save()
+            messages.success(request, 'El Contrato fue creado con éxito')
+            return redirect('index')
+    return render(request, 'web/alta_contrato.html', context)
+
+@login_required
 def listado_jugadores(request):
     jugadores = Jugador.objects.all().order_by('nombre')
     context = {
@@ -92,20 +107,6 @@ def listado_contratos(request):
     }
     return render(request, 'web/lista_contratos.html', context)
 
-@login_required
-def alta_contrato(request):
-    context = {}
-    if request.method == "GET": 
-        context['alta_contrato_form'] = AltaContratoForm()
-    else:
-        form = AltaContratoForm(request.POST)
-        context['alta_contrato_form'] = form
-        if form.is_valid():
-            nuevo_contrato = form.save()
-            messages.success(request, 'El Contrato fue creado con éxito')
-            return redirect('index')
-    return render(request, 'web/alta_contrato.html', context)
-
 
 @login_required
 def firma_contrato(request):
@@ -129,6 +130,7 @@ def lista_contratos_firmados(request):
     }
     return render(request, 'web/lista_contratos_firmados.html', context)
 
+#MODIFICA
 
 @login_required
 def edit_jugador(request, jugador_id):

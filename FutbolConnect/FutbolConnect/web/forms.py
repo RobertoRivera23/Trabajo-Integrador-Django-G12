@@ -70,17 +70,3 @@ class FirmaContratoForm(forms.ModelForm):
 
         return self.cleaned_data["dni"]
 
-
-"""class AltaContratoForm(forms.Form):
-    nombre = forms.CharField(label="Nombre", required=True)
-    tipo_contrato = forms.ChoiceField(label="Amateur o Profesional", choices=opciones_tipo_contrato)
-    descripcion = forms.CharField(required=True, label="Descripción")
-    posicion_contratado = forms.ChoiceField(label="Posición Contratada", choices=opciones_posicion)
-    fecha_inicio = forms.DateField(label="Fecha de inicio")
-    fecha_fin = forms.DateField(label="Fecha de finalización")
-    clausula = forms.CharField(label="Clausula", required=True)
-    monto = forms.IntegerField(label="Monto")
-    activo = forms.BooleanField(label="Estado", required=False)
-    representante = forms.IntegerField(label="Representante", required=False) #un repre muchos contratos
-    jugadores = forms.IntegerField(label="Jugador")
-    """

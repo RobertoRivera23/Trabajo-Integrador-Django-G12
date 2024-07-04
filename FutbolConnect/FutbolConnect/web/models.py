@@ -6,9 +6,8 @@ import datetime
 
 # opciones para el choice de jugador
 opciones = [
-    (1, " "),
-    (2, "Si"),
-    (3, "No")
+    (1, "Si"),
+    (2, "No")
 ]
 class Persona(models.Model):
     nombre = models.CharField(max_length=100, verbose_name="Nombre", null=False)
@@ -29,15 +28,14 @@ class Persona(models.Model):
 
 #Opciones de Posición
 opciones_posicion = [
-    (1," "),
-    (2, "Arquero"), 
-    (3, "Defensor Central"),
-    (4, "Lateral Izquierdo"), 
-    (5, "Lateral Derecho"), 
-    (6, "Mediocampista Central"), 
-    (7, "Mediocampista Izquierdo"),
-    (8, "Mediocampista Derecho"),
-    (9, "Delantero")   
+    (1, "Arquero"), 
+    (2, "Defensor Central"),
+    (3, "Lateral Izquierdo"), 
+    (4, "Lateral Derecho"), 
+    (5, "Mediocampista Central"), 
+    (6, "Mediocampista Izquierdo"),
+    (7, "Mediocampista Derecho"),
+    (8, "Delantero")   
 ]
 #Clase jugdor que hereda de Persona y devuele (atributos de persona y jugador)
 class Jugador(Persona):
@@ -54,9 +52,6 @@ class Jugador(Persona):
    
     def __str__(self):
         return f"nombre: {self.nombre_completo()} | DNI: {self.dni} | F.Nac.: {self.fecha_nacimiento} | Pase: {self.estado} | Posición: {self.posicion} | email: {self.mail} | Activo: {self.activo}" 
-   
-    #Lo sacamos para Probar sin Fecha de Nacimiento
-    
    
    
     
@@ -106,14 +101,6 @@ class Contrato(models.Model):
         return f"Representante: {self.TipoContratos.representante.nombre_completo} | Jugador: {self.jugador.nombre_completo} | Tipo de Contrato: {self.TipoContratos.tipo_contrato} | Activo: {self.activo}"
 
 
-   # class Meta:
-    #    db_table = 'Contrato'
-
-    #def __str__(self):
-     #   return f"Contrato de {self.jugador.nombre_completo()} | en posición: {self.jugador.posicion} | Representante: {self.representante.nombre_completo} | tipo de contratación: {self.TipoContratos.tipo_contrato}"
-  
-#Fomulario de Contacto VEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRR
-  
 class Contacto(models.Model):
     nombre = models.CharField(max_length=100, verbose_name="Nombre")
     apellido = models.CharField(max_length=100, verbose_name="Apellido")
@@ -122,39 +109,3 @@ class Contacto(models.Model):
     
     def __str__(self):
         return f"Nombre: {self.nombre} | Apellido: {self.apellido} | Email: {self.mail} | Fecha y Hora: {self.fecha_hora}"
-
-
-############################ Hasta aca teniamos #####################################
-
-#class Jugador(models.Model):
-#    nombre = models.CharField(max_length=100, verbose_name="Nombre")
-#    apellido = models.CharField(max_length=100, verbose_name="Apellido")
-#    dni = models.IntegerField(verbose_name="DNI", unique=True)
-
-#class Paises(models.Model):
- #   nombre = models.CharField(max_length=100, verbose_name="Nombre")
-  #  apellido = models.CharField(max_length=100, verbose_name="Apellido")
-   # dni = models.IntegerField(verbose_name="DNI", unique=True)
-    #cuit = models.IntegerField(verbose_name="CUIT", unique=True)  # Changed field name to2
-    #  lowercase
-
-#class TipoContratos(models.Model):
- #   nombre = models.CharField(max_length=100, verbose_name="Nombre")
-  #  descripcion = models.CharField(max_length=200, verbose_name="Descripción")
-   # turno = models.CharField(max_length=50, verbose_name="Turno")
-    #cupos = models.IntegerField(verbose_name="Cupos",
-     #   validators=[
-      #      MaxValueValidator(100),
-       #     MinValueValidator(0)
-        #]   
-    #)
-    #fecha_inicio = models.DateField(verbose_name="Fecha de inicio")
-    #fecha_fin = models.DateField(verbose_name="Fecha de finalización")
-    #paises = models.ForeignKey(Paises, on_delete=models.CASCADE, null=True)
-    #jugador = models.ManyToManyField(Jugador, through='Inscripcion')
-
-#class Inscripcion(models.Model):
- #   jugador = models.ForeignKey(Jugador, on_delete=models.CASCADE)
-  #  tipocontratos = models.ForeignKey(TipoContratos, on_delete=models.CASCADE, default=1)  # Assuming default value is 1
-   # fecha_inscripcion = models.DateField(verbose_name="Fecha de inscripción", auto_now_add=True)
-
