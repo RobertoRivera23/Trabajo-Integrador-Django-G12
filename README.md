@@ -4,8 +4,6 @@
 
 # Proyecto: FutbolConnect
 
-### Integrantes del grupo
-
 # Futbol Connect
 Futbol Connect es una plataforma web diseñada para conectar jugadores de fútbol, tanto profesionales como amateurs, con representantes y agentes deportivos.
 
