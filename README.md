@@ -12,11 +12,11 @@ Futbol Connect facilita la interacción entre jugadores de fútbol en busca de o
 
 ### Funcionalidades Principales
 
-** Registro de Jugadores y Representantes: Permite a jugadores y representantes registrarse y crear perfiles detallados.
+** Registro de Jugadores y Representantes: Permite a jugadores y representantes registrarse y crear perfiles detallados.**
 
-** Listado de jugadores 
+** Listado de jugadores **
 
-** Listadado de agencias y representantes
+** Listadado de agencias y representantes **
 
 
 ### Demo en Vivo: Futbol Connect - Demo en Vivo (Agregar enlace si está disponible)
